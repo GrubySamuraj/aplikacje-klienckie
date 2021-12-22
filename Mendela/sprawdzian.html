@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #main {
+        width: 612px;
+        height: 600px;
+        border: 1px black solid;
+        position: relative;
+    }
+
+    .cegiełki {
+        width: 100px;
+        height: 50px;
+        background-color: red;
+        border: black solid 1px;
+        float: left;
+    }
+
+    #paletka {
+        width: 120px;
+        background-color: blue;
+        height: 20px;
+        position: absolute;
+        bottom: 20px;
+    }
+
+    #pilka {
+        border-radius: 30px;
+        height: 50px;
+        width: 50px;
+        background-color: purple;
+        position: absolute;
+        left: 300px;
+        bottom: 50px
+    }
+</style>
+
+<body>
+    <div id="main">
+        <div id="paletka"></div>
+        <div id="pilka"></div>
+    </div>
+    <script>
+        let main = document.getElementById("main");
+        for (let x = 0; x < 24; x++) {
+            let div = document.createElement("div");
+            div.classList.add("cegiełki")
+            main.appendChild(div)
+        }
+        let paletka = document.getElementById("paletka");
+        let pilka = document.getElementById("pilka");
+        main.onmouseenter = function () {
+            main.onmousemove = function (e) {
+                if (e.clientX > 0 && e.clientX <= 490) {
+                    paletka.style.left = e.clientX + "px"
+                }
+            }
+        }
+        x = (Math.PI / 4)
+        r1 = 70
+        r2 = 70
+        let cos = 0;
+        let cos2 = 0
+        let zycie = 5
+        let realzycie = (zycie * 2)
+        posx = (Math.sin(x) * r1)
+        posy = (Math.cos(x) * r2)
+        let interwal = window.setInterval(function () {
+            if (realzycie != 0) {
+                if (Math.floor(posx + 300) == 550) {
+                    cos++
+                }
+                else if (Math.floor(posx + 300) == 0) {
+                    cos--
+                }
+                if (cos % 2 == 0) {
+                    r1++
+                }
+                else {
+                    r1--
+                }
+                if ((Math.floor(posy)) == 550) {
+                    cos2++
+                }
+                else if ((Math.floor(posy)) == 0) {
+                    cos2++
+                }
+                if (cos2 % 2 == 0) {
+                    r2++
+                }
+                else {
+                    r2--
+                }
+                posx = (Math.sin(x) * r1)
+                posy = (Math.cos(x) * r2)
+                if (paletka.style.top == Math.floor(posy - 50) && (paletka.style.right <= Math.floor(posx)) && (paletka.style.right + 120) >= Math.floor(posx)) {
+                    r2 += 50
+                    cos2++
+                }
+                pilka.style.left = (300 + posx) + "px"
+                pilka.style.bottom = posy + "px"
+                if (Math.floor(posy - 49) == 0) {
+                    realzycie--;
+                    console.log("straciles zycie :<");
+                }
+            }
+            else {
+                alert("koniec gry, przegrałeś");
+            }
+        }, 1);
+        // 1. 1 pkt
+        // 2. 1 pkt
+        // 3. 1.5 pkt
+        // 4. 2 pkt
+        // 5. 0 pkt
+        // 6. 1.5 pkt
+        // 7. 0 pkt
+    </script>
+</body>
+
+</html>

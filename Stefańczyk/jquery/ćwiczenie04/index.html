@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragosz Jakub 3i1 gr1 zadanie1</title>
+    <script src="libs/jq.js"></script>
+    <style>
+        td {
+            background-color: red;
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            let lps = ["lp", "cena", "produkt"]
+            let ceny = ["5,60", "3,23", "7,45", "10,00", "3,20"]
+            let produkty = ["chleb", "mąka", "masło", "kefir", "dżem"]
+
+            let ceny2 = []
+            let suma = 0
+            for (let y = 0; y < ceny.length; y++) {
+                ceny2.push(parseFloat(ceny[y].replace(",", ".")))
+            }
+            console.log(ceny2)
+            for (const element of ceny2) {
+                suma = element + suma
+            }
+            console.log(suma)
+
+            let tr = $("<tr>")
+
+
+            $("#bt1").on("click", function () {
+                let tr = $("<tr>")
+                $("#table1").append(tr)
+                for (let x = 0; x < lps.length; x++) {
+                    let td = $("<td>").html(lps[x])
+                    tr.append(td)
+
+                }
+                for (let x = 0; x < ceny.length; x++) {
+                    let tr = $("<tr>")
+                    let td = $("<td>").html(x + 1)
+                    tr.append(td)
+                    $("#table1").append(tr)
+                    let td2 = $("<td>").html(ceny[x])
+                    tr.append(td2)
+                    $("#table1").append(tr)
+                    let td3 = $("<td>").html(produkty[x])
+                    tr.append(td3)
+                }
+                tr = $("<tr>")
+                $("#table1").append(tr)
+                let td1 = $("<td>").html("Suma")
+                tr.append(td1)
+                let td2 = $("<td colspan='2'>").html(suma)
+                tr.append(td2)
+
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <h1>T:tablice</h1>
+    <button id="bt1"> Utwórz tabelę</button>
+    <table id="table1">
+
+    </table>
+</body>
+
+</html>

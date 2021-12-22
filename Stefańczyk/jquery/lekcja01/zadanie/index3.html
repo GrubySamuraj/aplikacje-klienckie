@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadanie 3b Jakub Dragosz 3i1 gr1</title>
+    <style>
+        #div1 {
+            height: 100px;
+            width: 100px;
+            background-color: brown;
+            float: left;
+        }
+    </style>
+    <script src="libs/jq.js"> </script>
+    <script>
+        $(document).ready(function () {
+            let x = 0
+            $("#div1").on("click", function () {
+                if (x === 0) {
+                    $("#div1").css("float", "right");
+                }
+                else {
+                    $("#div1").css("float", "left");
+                }
+                x++;
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div id="div1"> </div>
+</body>
+
+</html>

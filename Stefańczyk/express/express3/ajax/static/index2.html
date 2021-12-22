@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <style>
+        #btn {
+            width: 50px;
+            height: 50px;
+            background-color: brown;
+        }
+
+        #range2 {
+            width: 500px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="range" id="range1" min="0" max="100">
+    </br>
+    <input type="range" id="range2" min="0" max="100">
+    <script>
+        $(document).ready(function () {
+            $("#range1").on("input", function () {
+                let input1 = $("#range1").val();
+                console.log(input1);
+                $.ajax({
+                    url: "/post",
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        a: input1
+                    }),
+                    type: "POST",
+                    success: function (data) {
+                        console.log(data.input1);
+                        $("#range2").val(data.input1);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error: ' + error.message);
+                    },
+                })
+            });
+        })
+    </script>
+</body>
+
+</html>

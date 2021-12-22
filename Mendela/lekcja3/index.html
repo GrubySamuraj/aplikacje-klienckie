@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guma Jakub Dragosz 3i1 gr1</title>
+</head>
+<style>
+    h2 {
+        font-family: "Comic Sans MS", sans-serif, monospace;
+    }
+
+    input {
+        width: 190px;
+    }
+
+    #punkty {
+        text-align: center;
+        font-family: monospace, sans-serif;
+    }
+
+    #sanic {
+        position: absolute;
+    }
+
+    #containerimg {
+        width: 500px;
+        height: 500px;
+        position: relative;
+    }
+
+    #kot {
+        width: 650px;
+        height: 650px;
+    }
+</style>
+
+<body>
+    <h2>1.Powiększający się kot(Guma)</h2>
+    <div id="kot">
+        <img style="width:382px; length:473px;" id="img" src="Kot.jpg" alt="tu mial byc kot">
+    </div>
+    <h2>2.Tekst</h2>
+    <input id="input"></input>
+    <h2>3.Spadające punkty</h2>
+    <label for="punkty">Punkty lecą z nieba?</label></br>
+    <textarea id="punkty" name="story" rows="16" cols="20">
+    </textarea>
+    </br></br>
+    <h2>4.Obracająca się grafika</h2>
+    <div id="containerimg">
+        <img style="width:50px; length:50px; left: 225px; bottom: 225px;" id="sanic" src="img/sanic.jpg"
+            alt="tu mial byc sanic" />
+    </div>
+    <script>
+        let o = 0;
+
+        function animacja() {
+            let element = document.querySelector("#img");
+            let width = element.width;
+            let length = element.length;
+            if (o < 4) {
+                width += 100;
+                element.style.width = width + 'px';
+                element.style.length = length + 'px';
+                o++;
+            }
+            else {
+                width -= 100;
+                element.style.width = width + 'px';
+                element.style.length = length + 'px';
+                o++;
+            }
+            if (o == 8) {
+                o = 0;
+            }
+        }
+        let value1 = " Ciekawe czy uda Ci się to zrobić ";
+        let x = 0;
+        let y = 0;
+        value1 = value1.split('');
+        document.getElementById("input").value = "";
+
+        function input() {
+            let element = document.getElementById("input");
+            value1.push(value1.shift());
+            element.value = value1.join('');
+        }
+
+
+
+        document.getElementById("punkty").value = "";
+        let counter = 0;
+        let elementy = [];
+        let elementy2 = ["\nPierwszy punkt", "\nDrugi punkt", "\nTrzeci punkt", "\nCzwarty punkt", "\nPiąty punkt", "\nSzósty punkt"];
+
+        function SpadającePunkty() {
+            let element = document.getElementById("punkty");
+            row = element.getAttribute('rows');
+            if (y > 5) {
+                elementy.unshift('\n');
+            }
+            else {
+                elementy.unshift(elementy2[y]);
+                y++;
+            }
+            if (counter == 0) {
+                elementy.shift;
+            }
+            counter++;
+            element.value = elementy.join('');
+            if (counter - 5 > row) {
+                elementy = [];
+                counter = 0;
+                y = 0;
+            }
+            if (counter + 2 > row) {
+                // elementy.unshift("\n");
+                elementy.pop();
+            }
+        }
+        let alpha = 0;
+        const poczx = parseInt(document.getElementById("sanic").style.left.slice(0, -2));
+        const poczy = parseInt(document.getElementById("sanic").style.bottom.slice(0, -2));
+        function obrot() {
+            const r = 225;
+            element = document.getElementById("sanic");
+            let posx = r * Math.cos(alpha);
+            let posy = r * Math.sin(alpha);
+            posx = posx + poczx;
+            posy = posy + poczy;
+            element.style.left = (posx + "px");
+            element.style.bottom = (posy + "px");
+            alpha -= 0.1;
+        }
+        let interval = setInterval(animacja, 500);
+        let interval1 = setInterval(input, 300);
+        let interval2 = setInterval(SpadającePunkty, 200);
+        let interval3 = setInterval(obrot, 50);
+    </script>
+</body>
+
+</html>

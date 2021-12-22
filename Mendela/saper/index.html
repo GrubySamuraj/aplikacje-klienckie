@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .pole {
+            background-color: gray;
+            width: 50px;
+            height: 50px;
+            border: black 1px solid;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="menu">
+        <input type="text" name="width" id="width">
+        <label for="width">width</label>
+        <br>
+        <input type="text" name="height" id="height">
+        <label for="height">height</label>
+        <br>
+        <input type="text" name="miny" id="miny">
+        <label for="height">miny</label>
+        <br>
+        <button id="przyciszczek">Done</button>
+    </div>
+    <div id="poleminowe">
+    </div>
+    <script>
+        let game = {
+            plansza:[],
+            createBigDiv: function () {
+                document.getElementById("przyciszczek").onclick =  () => {
+                    let width = document.getElementById("width").value
+                    let height = document.getElementById("height").value
+                    let miny = document.getElementById("miny").value
+                    let left = 0;
+                    let top = 0;
+                    for (let x = 0; x < width; x++) {
+                        for (let y = 0; y < height; y++) {
+                            let div = document.createElement("div");
+                            div.style.left = left + "px"
+                            left += 52;
+                            div.classList.add("pole");
+                            document.getElementById("poleminowe").appendChild(div)
+                            this.plansza.push(div)
+                        }
+                    }
+                }
+            }
+        }
+        //tablica elementów
+        
+
+        game.createBigDiv()
+
+    </script>
+</body>
+
+</html>

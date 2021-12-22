@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="main">
+        <form action="/formularz" method="GET">
+            <input type="hidden" name="hidden">
+            <input type="color" name="color">
+            <input type="radio" name="radio">
+            <input type="checkbox" name="ch1">
+            <input type="checkbox" name="ch2">
+            <input type="submit" value="submit">
+        </form>
+        <table>
+            <form action="/formularz2" method="GET"></form>
+            <!-- normalnie string -->
+            <tr>
+                <td>Imie i nazwisko</td>
+                <td>obecny</td>
+                <td>nieobecny</td>
+                <td>spóźniony</td>
+            </tr>
+            <!-- for, który ma wygenerować y wierszy(y-> długość tablicy)-->
+            <tr>
+                <td>1.Nazwisko Imie</td>
+                <td><input type="radio" name="bal" value="obecny"></td>
+                <td><input type="radio" name="bal" value="nieobecny"></td>
+                <td><input type="radio" name="bal" value="spóźniony"></td>
+            </tr>
+            <!-- normalnie string -->
+            </form>
+        </table>
+    </div>
+</body>
+
+</html>

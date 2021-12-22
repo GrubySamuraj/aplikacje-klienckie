@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <style>
+        #main {
+            width: 1000px;
+            height: 500px;
+        }
+
+        #lewy {
+            background-color: yellow;
+            float: left;
+            width: 50%;
+            height: 100%;
+        }
+
+        #prawy {
+            background-color: green;
+            float: left;
+            width: 50%;
+            height: 100%;
+        }
+
+        .prawekropki {
+            position: absolute;
+            border-radius: 50px;
+            width: 50px;
+            height: 50px;
+            background-color: black;
+            color: white
+        }
+
+        .lewekropki {
+            position: absolute;
+            border-radius: 50px;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            color: white
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="lewy"></div>
+        <div id="prawy"></div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#lewy").on("click", function (e) {
+                let left = e.clientX - 25;
+                let top = e.clientY - 25;
+                let start = Date.now();
+                let div = $("<div>").addClass("lewekropki").css("left", left).css("top", top).html(`${left}</br>${top}`);
+                $("#lewy").append(div);
+                $.ajax({
+                    url: "/post",
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        lewy: left,
+                        top: top,
+                        start: start
+                    }),
+                    type: "POST",
+                    success: function (data) {
+                        let stop = Date.now()
+                        let czas = stop - data.start;
+                        let div2 = $("<div>").addClass("prawekropki").css("left", data.left).css("top", data.top).html(czas);
+                        $("#lewy").append(div2);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log('Error: ' + error.message);
+                    },
+                })
+            });
+        })
+    </script>
+</body>
+
+</html>

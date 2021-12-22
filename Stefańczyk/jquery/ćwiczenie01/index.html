@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #d1 {
+            background-color: aquamarine;
+            height: 200px;
+            width: 200px;
+        }
+    </style>
+    <script src="libs/jq.js"></script>
+    <script>
+        $(document).ready(function () {
+            let i = 0
+            $("d1").off
+            $("#bt1").on("click", function () {
+                i++
+                if (i % 2 == 0) {
+                    $(#d1).on
+                } else {
+                    $(#d1).off
+                }
+
+            })
+            $("d1").on("mouseover", function () {
+
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <h1 id="t1">T: jquery - zdarzenia</h1>
+    <button id="bt1">Dodaj/usuń listenery</button>
+    <div id="d1"></div>
+</body>
+
+</html>

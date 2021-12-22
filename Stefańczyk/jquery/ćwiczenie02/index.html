@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragosz Jakub 3i1 gr1 zadanie1</title>
+    <style>
+        #divy {
+            width: 500px;
+            height: 100px;
+            background-color: aqua;
+            border: 1px black solid;
+        }
+    </style>
+    <script src="libs/jq.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#bt1").on("click", function () {
+                let x = $("#select1").val();
+
+                for (let i = 0; i < x; i++) {
+                    let div = $("<div id=divy>").html(i).addClass("elem").on("click", function () {
+                        var c = confirm("Czy chcesz usunac element?")
+                        if (c) {
+                            $(this).remove()
+                        }
+                    })
+                    $("#main").append(div)
+                }
+            })
+
+            $("#bt2").on("click", function () {
+                $("#main").empty()
+            })
+        })
+
+    </script>
+</head>
+
+<body>
+    <h1>T:Pętla for, dynamiczne tworzenie i usuwanie html-a, cz1</h1>
+    <button id="bt1">Utwórz menu</button>
+    <button id="bt2">Usuń menu</button>
+    <select id="select1">
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+    </select>
+    <div id="main"></div>
+
+</body>
+
+</html>

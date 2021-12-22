@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadanie 3e Jakub Dragosz 3i1 gr1</title>
+    <style>
+        #div1 {
+            height: 100px;
+            width: 100px;
+            background-color: pink;
+            float: left;
+        }
+    </style>
+    <script src="libs/jq.js"> </script>
+    <script>
+        let wid = 100;
+        let hei = 100;
+        $(document).ready(function () {
+            let x = 0;
+            $("#div1").on("mouseover", function () {
+                if (x < 6) {
+                    $("#div1").text(x);
+                    x++;
+                }
+                else if (x > 5 && x < 8) {
+                    hei = hei * 2;
+                    wid = wid * 2;
+                    $("#div1").height(hei)
+                    $("#div1").width(wid)
+                    x++;
+                }
+
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div id="div1"> </div>
+</body>
+
+</html>

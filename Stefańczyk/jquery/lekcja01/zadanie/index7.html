@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zad 7 Dragosz Jakub 3i1gr1</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        #div1 {
+            background-color: #e4e4e4;
+            width: 300px;
+            height: 300px;
+            font-size: 50px;
+            color: white;
+        }
+
+        h1 {
+            color: blue;
+        }
+    </style>
+    <script src="libs/jq.js"></script>
+    <script>
+        $(document).ready(function () {
+            let x = 0;
+            $("#bt1").on("click", function () {
+                x++;
+                if (x % 3 == 1) {
+                    $("#div1").height(400);
+                    $("#div1").width(400);
+                    $("#div1").css("background-color", "#999999");
+                    $("#div1").css("font-size", "60px");
+                    $("#div1").html("<b> boldem italic </b>");
+                    $("h1").html("listenery dodane");
+                }
+                else if (x % 3 == 2) {
+                    $("h1").html("listenery usuniete");
+                    $("#div1").empty();
+                    $("#div1").css("background-color", "#333333");
+                }
+                else {
+                    $("#div1").height(300);
+                    $("#div1").width(300);
+                    $("h1").html("T: jQuery - zdarzenia");
+                    $("#div1").css("background-color", "#e4e4e4");
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <h1>T: jQuery - zdarzenia</h1>
+    <button id="bt1">Dodaj / Usuń Listenery</button>
+    <div id="div1"></div>
+</body>
+
+</html>

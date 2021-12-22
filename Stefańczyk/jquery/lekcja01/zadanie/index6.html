@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadanie 3e Dragosz Jakub 3i1 gr1</title>
+
+    <script src="libs/jq.js"></script>
+
+    <style>
+        #div1 {
+            height: 100px;
+            width: 100px;
+            background-color: green;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 100px;
+            font-size: 40px;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            let x = 0;
+            $("#div1").on("click", function () {
+                if (x % 2 == 0) {
+                    $("#div1").css("background-color", "green");
+                    $("#div1").text(x);
+                }
+                else {
+                    $("#div1").css("background-color", "red");
+                    $("#div1").text(x);
+                }
+                x++;
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div id="div1"></div>
+</body>
+
+</html>

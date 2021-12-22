@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .pole {
+        width: 50px;
+        height: 50px;
+        border: solid black 1px;
+        float: left;
+    }
+
+    .statek {
+        background-color: black;
+    }
+
+    :nth-child(10n+1) {
+        clear: both;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="right-table"></div>
+    </div>
+    <script>
+        const tablen = 10;
+        let mainarray = [];
+        let iloscwstawien = 0;
+
+        function generate(funtablen) {
+            let mainarray = []
+            for (let x = 0; x < funtablen; x++) {
+                let nestedarray = [];
+                for (let y = 0; y < funtablen; y++) {
+                    nestedarray.push(0);
+                }
+                mainarray.push(nestedarray);
+            }
+            return mainarray;
+        }
+
+        function generateships(length, mainarray, iloscstatkow) {
+            iloscwstawien = 0;
+            while (iloscwstawien < iloscstatkow) {
+                let ifhorizontal = Math.floor(Math.random() * 2);
+                let randomnumber = Math.floor(Math.random() * (10));
+                let randomnumber1 = Math.floor(Math.random() * (mainarray.length - length + 1));
+                let iswstawic = true;
+                console.log("randomnumber: ", randomnumber);
+                console.log("randomnumber1: ", randomnumber1);
+                if (ifhorizontal == 1) {
+                    for (let len = - 1; len < length + 1; len++) {
+                        if ((mainarray[randomnumber - 1]?.[randomnumber1 + len] == 1) || (mainarray[randomnumber][randomnumber1 + len] == 1 || mainarray[randomnumber][randomnumber1 + len] == 2) || ((mainarray[randomnumber + 1]?.[randomnumber1 + len] == 1))) {
+                            iswstawic = false;
+                        }
+                    }
+                    if (iswstawic === true) {
+                        for (let len = 0; len < length; len++) {
+                            if (mainarray[randomnumber - 1] != undefined) {
+                                mainarray[randomnumber - 1][randomnumber1 + len] = 2;
+                            }
+                            mainarray[randomnumber][randomnumber1 + len] = 1;
+                            if (mainarray[randomnumber + 1] != undefined) {
+                                mainarray[randomnumber + 1][randomnumber1 + len] = 2;
+                            }
+                        }
+                        for (let len = 0; len < 3; len++) {
+                            if (mainarray[randomnumber - 1 + len] != undefined) {
+                                mainarray[randomnumber - 1 + len][randomnumber1 - 1] = 2;
+                            }
+                            if (mainarray[randomnumber - 1 + len] != undefined) {
+                                mainarray[randomnumber - 1 + len][randomnumber1 + length] = 2;
+                            }
+                        }
+                        iloscwstawien++;
+                    }
+                }
+                else {
+                    for (let len = -1; len < length + 1; len++) {
+                        if (mainarray[randomnumber1 + len]?.[randomnumber - 1] == 1 || (mainarray[randomnumber1 + len]?.[randomnumber] == 1 || mainarray[randomnumber1 + len]?.[randomnumber] == 2) || mainarray[randomnumber1 + len]?.[randomnumber + 1] == 1) {
+                            iswstawic = false;
+                        }
+                    }
+                    if (iswstawic === true) {
+                        for (let len = 0; len < length; len++) {
+                            if (mainarray[randomnumber1 + len] != undefined) {
+                                mainarray[randomnumber1 + len][randomnumber - 1] = 2;
+                                mainarray[randomnumber1 + len][randomnumber + 1] = 2;
+                            }
+                            mainarray[randomnumber1 + len][randomnumber] = 1;
+                        }
+                        for (let len = 0; len < 3; len++) {
+                            if (mainarray[randomnumber1 - 1] != undefined)
+                                mainarray[randomnumber1 - 1][randomnumber - 1 + len] = 2
+                            if (mainarray[randomnumber1 + length] != undefined)
+                                mainarray[randomnumber1 + length][randomnumber - 1 + len] = 2;
+                        }
+                        iloscwstawien++;
+                    }
+                }
+                console.log("ilosc wstawien: ", iloscwstawien);
+                console.log("ifhorizontal:", ifhorizontal);
+            }
+        }
+        function generateobjects(mainarray, id) {
+            let main = document.getElementById(`${id}`);
+            let dlugosc = 0;
+            for (let i = 0; i < mainarray.length; i++) {
+                for (let j = 0; j < mainarray.length; j++) {
+                    let div = document.createElement("div");
+                    if (mainarray[i][j] == 1) {
+                        div.classList.add("statek");
+                    }
+                    if (mainarray[i][j] == 2) {
+                        div.classList.add("statek1");
+                    }
+                    div.classList.add("pole");
+                    div.id = i + "_" + j;
+                    main.appendChild(div);
+                }
+            }
+        }
+
+        mainarray = generate(tablen);
+        generateships(4, mainarray, 1);
+        generateships(3, mainarray, 2);
+        generateships(2, mainarray, 3);
+        generateships(1, mainarray, 4);
+
+        generateobjects(mainarray, "right-table" );
+    </script>
+</body>
+
+</html>

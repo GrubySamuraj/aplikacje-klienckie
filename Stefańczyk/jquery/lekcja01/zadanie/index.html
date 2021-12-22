@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadanie 1</title>
+    <style>
+        h1 {
+            color: blue;
+        }
+
+        #div1 {
+            background-color: red;
+            height: 100px;
+            width: 100px;
+            left: 50px;
+            top: 50px;
+            position: relative;
+        }
+
+        #div2 {
+            background-color: aqua;
+            height: 200px;
+            width: 200px;
+            position: absolute;
+        }
+    </style>
+    <script src="libs/jq.js"></script>
+    <script>
+        let x = 0
+        //
+        $(document).ready(function () {
+            $("#bt1").on("click", function () {
+                x += 1;
+                if (x % 3 == 1) {
+                    $("#div1").css("background", "blue")
+                    $("#div1").html("<strong> kocham aplikacje klienckie </strong>")
+                }
+                else if (x % 3 == 2) {
+                    $("#div1").css("background", "red")
+                    $("#div1").text("kocham aplikacje klienckie")
+                }
+                else {
+                    $("#div1").empty
+                    $("#div1").css("background", "green")
+                }
+            })
+
+        })
+
+
+    </script>
+
+<body>
+    <h1>T: jQuery - zdarzenia</h1>
+    <button id="bt1">Zmien kolor </button>
+    <div id="div2">
+        <div id="div1"> </div>
+    </div>
+</body>
+
+</html>

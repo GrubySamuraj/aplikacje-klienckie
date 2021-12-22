@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dragosz Jakub 3i1 gr1 PESEL</title>
+</head>
+<script>
+    let pesel = prompt("Proszę podać swój pesel");
+    let waga = [];
+    const miesiace = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"]
+    let psl = pesel.split("");
+    let plec = 0;
+
+
+    //sprawdzanie peselu czy jest poprawna długość
+
+
+
+    while (pesel.length != 11) {
+        pesel = prompt("Jest to zły pesel, proszę wprowadzić poprawną wartość")
+        const psl = pesel.split("");
+    }
+    let kontr = -1;
+    console.log(pesel);
+
+
+    // sprawdzanie peselu czy jest poprawna suma kontrolna
+
+    let suma = 0
+    let M = 0
+
+    while (kontr != psl[10]) {
+        console.log("pesel: ", pesel)
+        for (let s = 0; s < 10; s++) {
+            if (s % 4 == 0) {
+                waga[s] = psl[s] * 1;
+            }
+            else if (s % 4 == 1) {
+                waga[s] = psl[s] * 3;
+            }
+            else if (s % 4 == 2) {
+                waga[s] = psl[s] * 7;
+            }
+            else {
+                waga[s] = psl[s] * 9;
+            }
+        }
+
+        console.log("waga: ", waga)
+
+        suma = 0;
+        for (const element of waga) {
+            suma = element + suma;
+        }
+        M = suma % 10;
+        kontr = 10 - M;
+        if (M != 0) {
+            console.log("suma: ", suma);
+            console.log("M", M);
+            console.log("Roznica: ", kontr);
+            if (kontr != psl[10]) {
+                pesel = alert("Jest to zły pesel, proszę wprowadzić poprawną wartość");
+                const psl = pesel.split("");
+            }
+            else {
+                break;
+            }
+        }
+        else {
+            break;
+        }
+    }
+
+
+
+    //Płeć
+
+
+    if (psl[9] % 2 == 0) {
+        console.log("Twoja płeć to kobieta");
+        plec = "Witam Panią, urodzona "
+    }
+    else {
+        plec = "Witam Pana, urodzony "
+        console.log("Twoja płeć to mężczyzna");
+    }
+
+    //Data urodzenia
+
+    //rok urodzenia
+    let rok = [0, 0, 0, 0];
+    console.log(psl);
+    let cos = psl[2] + psl[3];
+    console.log(cos);
+
+    if (psl[2] == 8 || psl[2] == 9) {
+        rok[0] = 1
+        rok[1] = 8
+        cos = cos - 80;
+    }
+    if (psl[2] == 0 || psl[2] == 1) {
+        rok[0] = 1
+        rok[1] = 9
+        cos = cos
+    }
+    if (psl[2] == 2 || psl[2] == 3) {
+        rok[0] = 2
+        rok[1] = 0
+        cos = cos - 20
+    }
+    if (psl[2] == 4 || psl[2] == 5) {
+        rok[0] = 2
+        rok[1] = 1
+        cos = cos - 40
+    }
+    if (psl[2] == 6 || psl[2] == 7) {
+        rok[0] = 2
+        rok[1] = 2
+        cos = cos - 60
+    }
+
+    rok[2] = parseInt(psl[0]);
+    rok[3] = parseInt(psl[1]);
+    rok = rok.join("")
+    console.log(rok)
+
+    //dzień urodzenia
+
+    let dzien = psl[4] + psl[5]
+
+
+    console.log(dzien)
+
+    //miesiąc urodzenie
+    if (cos < 14) {
+        const coscos = (cos % 13) - 1;
+        console.log(coscos);
+        let miesiac = miesiace[coscos]
+        console.log(miesiac);
+        let dataurodzenia = dzien + " " + miesiac + " " + rok;
+        console.log(dataurodzenia);
+        let wiadomosc = plec + dataurodzenia;
+        console.log(wiadomosc);
+        alert(wiadomosc);
+    }
+    else {
+        alert("Jest to niepoprawny PESEL")
+    }
+
+
+
+</script>
+
+
+<body>
+
+</body>
+
+</html>

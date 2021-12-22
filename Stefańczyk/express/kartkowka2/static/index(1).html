@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <title>Document</title>
+    <style>
+        #main {
+            background-color: yellow;
+            position: relative;
+            width: 500px;
+            height: 500px;
+        }
+
+        #divek {
+            background-color: blue;
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+        }
+
+        #input1,
+        #input2 {
+            float: right;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="range" min="0" max="100" id="input1">
+    <input type="range" min="0" max="100" id="input2">
+    <div id="main">
+        <div id="divek"></div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $("#input1").on("input", function () {
+                let input1 = $("#input1").val();
+                if (input1 < 80) {
+                    $.ajax({
+                        url: "/post",
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            a: input1
+                        }),
+                        type: "POST",
+                        success: function (data) {
+                            console.log(data.input1);
+                            $("#divek").css("left", data.input1);
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error: ' + error.message);
+                        },
+                    });
+                }
+            })
+            $("#input2").on("input", function () {
+                let input2 = $("#input2").val();
+                if (input2 < 80) {
+                    $.ajax({
+                        url: "/post2",
+                        contentType: 'application/json',
+                        data: JSON.stringify({
+                            b: input2
+                        }),
+                        type: "POST",
+                        success: function (data) {
+                            console.log(data.input2);
+                            $("#divek").css("top", data.input2);
+                        },
+                        error: function (xhr, status, error) {
+                            console.log('Error: ' + error.message);
+                        },
+                    });
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

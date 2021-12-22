@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    .pole {
+        width: 50px;
+        height: 50px;
+        border: solid black 1px;
+        float: left;
+        position: absolute;
+    }
+
+    .statek {
+        background-color: black;
+    }
+
+    #between {
+        float: left;
+        height: 528px;
+        width: 100px;
+        position: relative;
+    }
+
+    #main-left-table {
+        float: left;
+        position: relative;
+    }
+
+    #content-left,
+    #right-table {
+        float: left;
+        position: relative;
+        width: 520px;
+        height: 520px;
+    }
+
+    #statkiusera {
+        position: relative;
+        width: 300px;
+        float: left;
+    }
+
+    #container {
+        height: 528px;
+        padding: 50px;
+    }
+
+    .statekusera {
+        height: 52px;
+        margin: 20px;
+        cursor: pointer;
+    }
+
+    .polestatku {
+        position: relative;
+    }
+
+    #main-right-table {
+        float: left;
+        position: relative;
+    }
+
+    .mouseon {
+        background-color: green;
+    }
+
+    .zajete {
+        background-color: red;
+    }
+
+    .wstawionystatek {
+        background-color: black;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container">
+        <div id="main-left-table">
+            <div id="statkiusera"></div>
+        </div>
+        <div id="main-right-table">
+            <div id="content-left">
+                <div id="left-table"></div>
+            </div>
+            <div id="between"></div>
+            <div id="right-table"></div>
+        </div>
+    </div>
+    <script>
+        const tablen = 10;
+        let mainarray = [];
+        let userarray = [];
+        let iloscwstawien = 0;
+        function generate(funtablen) {
+            let mainarray = []
+            for (let x = 0; x < funtablen; x++) {
+                let nestedarray = [];
+                for (let y = 0; y < funtablen; y++) {
+                    nestedarray.push(0);
+                }
+                mainarray.push(nestedarray);
+            }
+            return mainarray;
+        }
+
+        function generateships(length, mainarray, iloscstatkow) {
+            iloscwstawien = 0;
+            while (iloscwstawien < iloscstatkow) {
+                let ifhorizontal = Math.floor(Math.random() * 2);
+                let randomnumber = Math.floor(Math.random() * (10));
+                let randomnumber1 = Math.floor(Math.random() * (mainarray.length - length + 1));
+                let iswstawic = true;
+                if (ifhorizontal == 1) {
+                    for (let len = - 1; len < length + 1; len++) {
+                        if ((mainarray[randomnumber - 1]?.[randomnumber1 + len] == 1) || (mainarray[randomnumber][randomnumber1 + len] == 1 || mainarray[randomnumber][randomnumber1 + len] == 2) || ((mainarray[randomnumber + 1]?.[randomnumber1 + len] == 1))) {
+                            iswstawic = false;
+                        }
+                    }
+                    if (iswstawic === true) {
+                        for (let len = 0; len < length; len++) {
+                            if (mainarray[randomnumber - 1] != undefined) {
+                                mainarray[randomnumber - 1][randomnumber1 + len] = 2;
+                            }
+                            mainarray[randomnumber][randomnumber1 + len] = 1;
+                            if (mainarray[randomnumber + 1] != undefined) {
+                                mainarray[randomnumber + 1][randomnumber1 + len] = 2;
+                            }
+                        }
+                        for (let len = 0; len < 3; len++) {
+                            if (mainarray[randomnumber - 1 + len] != undefined) {
+                                mainarray[randomnumber - 1 + len][randomnumber1 - 1] = 2;
+                            }
+                            if (mainarray[randomnumber - 1 + len] != undefined) {
+                                mainarray[randomnumber - 1 + len][randomnumber1 + length] = 2;
+                            }
+                        }
+                        iloscwstawien++;
+                    }
+                }
+                else {
+                    for (let len = -1; len < length + 1; len++) {
+                        if (mainarray[randomnumber1 + len]?.[randomnumber - 1] == 1 || (mainarray[randomnumber1 + len]?.[randomnumber] == 1 || mainarray[randomnumber1 + len]?.[randomnumber] == 2) || mainarray[randomnumber1 + len]?.[randomnumber + 1] == 1) {
+                            iswstawic = false;
+                        }
+                    }
+                    if (iswstawic === true) {
+                        for (let len = 0; len < length; len++) {
+                            if (mainarray[randomnumber1 + len] != undefined) {
+                                mainarray[randomnumber1 + len][randomnumber - 1] = 2;
+                                mainarray[randomnumber1 + len][randomnumber + 1] = 2;
+                            }
+                            mainarray[randomnumber1 + len][randomnumber] = 1;
+                        }
+                        for (let len = 0; len < 3; len++) {
+                            if (mainarray[randomnumber1 - 1] != undefined)
+                                mainarray[randomnumber1 - 1][randomnumber - 1 + len] = 2
+                            if (mainarray[randomnumber1 + length] != undefined)
+                                mainarray[randomnumber1 + length][randomnumber - 1 + len] = 2;
+                        }
+                        iloscwstawien++;
+                    }
+                }
+            }
+        }
+        function generateobjects(mainarray, id) {
+            let main = document.getElementById(`${id}`);
+            let dlugosc = 0;
+            let top = 0;
+            for (let i = 0; i < mainarray.length; i++) {
+                let left = 0;
+                for (let j = 0; j < mainarray.length; j++) {
+                    let div = document.createElement("div");
+                    div.style.left = left + "px"
+                    div.style.top = top + "px"
+                    left += 52;
+                    // if (mainarray[i][j] == 1) {
+                    //     div.classList.add("statek");
+                    // }
+                    // if (mainarray[i][j] == 2) {
+                    //     div.classList.add("statek1");
+                    // }
+                    div.classList.add("pole");
+                    div.classList.add("kwadraty");
+                    div.id = i + "_" + j;
+                    main.appendChild(div);
+                }
+                top += 52;
+            }
+        }
+
+        function generateuserships(length, table) {
+            let divy = 0;
+            let main = document.getElementById("statkiusera");
+            let div2 = document.createElement("div");
+            let rclick = 0;
+            div2 = document.createElement("div");
+            div2.classList.add("statek" + length);
+            div2.classList.add("statekusera");
+            div2.classList.add("notclicked");
+            for (let i = 0; i < length; i++) {
+                let div = document.createElement("div");
+                div.classList.add("pole");
+                div.classList.add("polestatku");
+                div2.appendChild(div);
+                div2.style.width = length * 52 + "px";
+            }
+            main.appendChild(div2);
+        }
+        function ships(table) {
+            shipss = document.getElementsByClassName("statekusera");
+            for (let ooo = 0; ooo < shipss.length; ooo++) {
+                shipss[ooo].onmouseenter = function () {
+                    for (let x = 0; x < this.children.length; x++) {
+                        if (this.children[x].style.backgroundColor != "purple") {
+                            this.children[x].style.backgroundColor = "pink";
+                        }
+                        shipss[ooo].onmouseleave = function () {
+                            if (this.children[x].style.backgroundColor != "purple") {
+                                for (let x = 0; x < this.children.length; x++) {
+                                    this.children[x].style.backgroundColor = "transparent";
+                                }
+                            }
+                        }
+                    }
+                }
+                let dlugoscstatku = 0;
+                let pom = 0;
+                let rclick = 0;
+                shipss[ooo].onmousedown = function () {
+                    let elements = document.getElementsByClassName("statekusera");
+                    let statek = this;
+                    for (let l = 0; l < elements.length; l++) {
+                        for (let pp = 0; pp < elements[l].children.length; pp++) {
+                            elements[l].children[pp].style.backgroundColor = "transparent";
+                        }
+                        for (let ppp = 0; ppp < statek.children.length; ppp++) {
+                            statek.children[ppp].style.backgroundColor = "purple";
+                        }
+                    }
+                    dlugoscstatku = parseInt(statek.classList[0].slice(-1));
+                    let lefttab = document.getElementById("left-table");
+                    for (let x = 0; x < table.length ** 2; x++) {
+                        lefttab.children[x].onmouseenter = function () {
+                            let id = this.id;
+                            let posx = parseInt((id).split("_")[0]);
+                            let posy = parseInt((id).split("_")[1]);
+                            for (haha = 0; haha < 100; haha++) {
+                                lefttab.children[haha].classList.remove('zajete');
+                                lefttab.children[haha].classList.remove('mouseon');
+                            }
+                            for (let y = 0; y < dlugoscstatku; y++) {
+                                if (statek) {
+                                    lefttab.onclick = function () {
+                                        if ((table[posx][posy] == 0 && table[posx][posy + dlugoscstatku - 1] == 0) || (posy >= table.length - dlugoscstatku && table[posx][table.length - (dlugoscstatku - y)] == 0)) {
+                                            if (posy >= table.length - dlugoscstatku) {
+                                                for (let stk = 0; stk < dlugoscstatku; stk++) {
+                                                    console.log(table.length - (dlugoscstatku - stk));
+                                                    document.getElementById(`${posx}_${table.length - (dlugoscstatku - stk)}`).style.backgroundColor = "black";
+                                                    document.getElementById(`${posx}_${table.length - (dlugoscstatku - stk)}`).classList.add("wstawionystatek");
+                                                    table[posx][table.length - (dlugoscstatku - stk)] = 1;
+                                                    if (table[posx - 1] != undefined) {
+                                                        table[posx - 1][table.length - (dlugoscstatku - stk)] = 2;
+                                                    }
+                                                    if (table[posx + 1] != undefined) {
+                                                        table[posx + 1][table.length - (dlugoscstatku - stk)] = 2;
+                                                    }
+                                                    if (table[posx + 1] != undefined) {
+                                                        table[posx + 1][table.length - (dlugoscstatku - stk)] = 2;
+                                                    }
+                                                    for (let len = 0; len < 3; len++) {
+                                                        if (table[posx - 1 + len] != undefined) {
+                                                            table[posx - 1 + len][table.length - (dlugoscstatku) - 1] = 2;
+                                                        }
+                                                    }
+                                                }
+                                                console.table(table);
+                                            }
+                                            else {
+                                                for (let stk = 0; stk < dlugoscstatku; stk++) {
+                                                    document.getElementById(`${posx}_${posy + stk}`).style.backgroundColor = "black";
+                                                    table[posx][posy + stk] = 1;
+                                                }
+                                                for (let len = 0; len < dlugoscstatku; len++) {
+                                                    if (table[posx - 1]?.[posy + len] != undefined) {
+                                                        table[posx - 1][posy + len] = 2;
+                                                    }
+                                                    if (table[posx + 1]?.[posy] != undefined) {
+                                                        table[posx + 1][posy] = 2;
+                                                    }
+                                                    if (table[posx + 1]?.[posy + len] != undefined) {
+                                                        table[posx + 1][posy + len] = 2;
+                                                    }
+                                                }
+                                                for (let len = 0; len < 3; len++) {
+                                                    if (table[posx - 1 + len]?.[posy - 1] != undefined) {
+                                                        table[posx - 1 + len][posy - 1] = 2;
+                                                    }
+                                                    if (table[posx - 1 + len]?.[posy + dlugoscstatku] != undefined) {
+                                                        table[posx - 1 + len][posy + dlugoscstatku] = 2;
+                                                    }
+                                                }
+                                            }
+                                            if (statek != null) {
+                                                if (statek.nextSibling) {
+                                                    pom = statek.nextSibling;
+                                                }
+                                                else if (statek.previousSibling) {
+                                                    pom = statek.previousSibling;
+                                                }
+                                                statek.remove();
+                                                statek = pom;
+                                                pom = 0;
+                                                if (statek) {
+                                                    dlugoscstatku = parseInt(statek.classList[0].slice(-1));
+                                                    for (let lll = 0; lll < statek.children.length; lll++) {
+                                                        statek.children[lll].style.backgroundColor = "purple";
+                                                    }
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                    if (statek != null) {
+                                        if ((table[posx][posy] == 0 && table[posx][posy + dlugoscstatku - 1] == 0) || (posy >= table.length - dlugoscstatku && table[posx][table.length - (dlugoscstatku - y)] == 0) && table[posx][table.length - (dlugoscstatku - y)] == 0) {
+                                            if (posy >= table.length - dlugoscstatku) {
+                                                document.getElementById(`${posx}_${table.length - (dlugoscstatku - y)}`).classList.add("mouseon");
+                                            }
+                                            else {
+                                                document.getElementById(`${posx}_${posy + y}`).classList.add("mouseon");
+                                            }
+                                        }
+                                        else {
+                                            if (posy >= table.length - dlugoscstatku) {
+                                                document.getElementById(`${posx}_${table.length - (dlugoscstatku - y)}`).classList.add("zajete");
+                                            }
+                                            else {
+                                                document.getElementById(`${posx}_${posy + y}`).classList.add("zajete");
+                                            }
+                                        }
+                                    }
+                                }
+                                else {
+                                    return table;
+                                    lefttab.children[x].onmouseenter = null;
+                                }
+                            }
+                        }
+                        // else {
+
+                        //     rclick = 0;
+                        // }
+                    }
+                }
+            }
+        }
+        let elements = document.getElementsByClassName("statekusera");
+        mainarray = generate(tablen);
+        userarray = generate(tablen);
+        generateships(4, mainarray, 1);
+        generateships(3, mainarray, 2);
+        generateships(2, mainarray, 3);
+        generateships(1, mainarray, 4);
+
+        generateobjects(mainarray, "right-table");
+        generateobjects(userarray, "left-table");
+        generateuserships(4, userarray);
+        generate(4, 1)
+        for (let x = 0; x < 2; x++) {
+            generateuserships(3, userarray);
+            generate(3, 1)
+        }
+        for (let x = 0; x < 3; x++) {
+            generateuserships(2, userarray);
+            generate(2, 1)
+        }
+        for (let x = 0; x < 4; x++) {
+            generateuserships(1, userarray);
+            generate(1, 1)
+        }
+        userarray1 = ships(userarray);
+        //notatki
+        // {
+        //     function jakas() {
+        //                     for (let x = 0; x < length; x++) {
+        //                         this.children[x].style.backgroundColor = "transparent";
+        //                     }
+        //                 }
+        //             }
+        // }
+        // this.oncontextmenu = function (e) { //nadpisuje funkcją
+                //     e.preventDefault();
+                //     rclick++;
+                //     if (rclick % 2 == 1) {
+                //         div2.style.width = "52px";
+                //     }
+                //     else {
+                //         div2.style.width = (length * 52) + "px";
+                //         rclick = 0;
+                //     }
+                //     e.stopPropagation();
+                // }
+
+    </script>
+</body>
+
+</html>

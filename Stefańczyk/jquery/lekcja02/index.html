@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lekcja 1</title>
+    <style>
+        #d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+    <script src="libs/jq.js"></script>
+    <script>
+        //
+        $(document).ready(function () {
+            $(window).on("mousemove", function (e) {
+                let x = e.clientX - $("#div").offset().left
+                let y = e.clientY - $("#div").offset().top
+            })
+        })
+
+        //end
+
+    </script>
+
+</head>
+
+<body>
+
+</body>
+
+</html>

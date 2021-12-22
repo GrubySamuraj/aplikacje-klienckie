@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lekcja 1</title>
+    <style>
+        #d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+    <script src="libs/jq.js"></script>
+    <script>
+        //
+        $(document).ready(function () {
+            console.log("jq działa ")
+
+            //button1, wyświetla w konsoli komunikat oraz podaje aktualną millisekundę
+            $("#bt1").on("click", function () {
+                console.log("klik" + new Date().getMilliseconds())
+
+            })
+            $("#bt2").on("click", function () {
+                alert("alert")
+            })
+            $("#bt3").on("click", function () {
+                //zmienne
+
+                let x = confirm("czy masz 18lat?")
+                console.log(x)
+
+                //if
+                if (x) {
+                    console.log("OK")
+                }
+                else {
+                    console.log("Nie")
+                }
+
+            })
+            $("#bt4").on("click", function () {
+                $("#d1")
+                    .css("width", 300)
+                    .css("height", 400)
+                    .html("<i> test </i>")
+                    .text("<i> test2 </i>")
+                    .width(200)
+
+            })
+
+            $("#bt5").on("click", function () {
+                $("#bt4").off("click")
+            })
+        })
+
+        //end
+
+    </script>
+
+</head>
+
+<body>
+    <button id="bt1"> start </button>
+    <button id="bt2"> alert </button>
+    <button id="bt3"> confirm </button>
+    <button id="bt4"> css </button>
+    <button id="bt5"> anuluj dialanie buttona 4 </button>
+
+    <div id="d1">
+
+    </div>
+
+</body>
+
+</html>

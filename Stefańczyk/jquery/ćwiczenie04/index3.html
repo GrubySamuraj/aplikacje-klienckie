@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .kwadraty {
+            height: 50px;
+            width: 50px;
+            border: 1px solid black;
+            position: absolute;
+        }
+
+        .kwadraty1 {
+            height: 50px;
+            width: 50px;
+            border: 1px solid black;
+            position: absolute;
+        }
+
+        #main {
+            position: relative;
+            float: left;
+        }
+
+        #lustro {
+            position: relative;
+            float: left;
+        }
+
+        #odstep {
+            position: relative;
+            float: left;
+            width: 20px;
+            height: 260px;
+        }
+
+        .mirrored {
+            background-color: green;
+            width: 50px;
+            height: 50px;
+            border: solid black 1px;
+            position: absolute;
+        }
+    </style>
+    <script src="libs/jq.js"></script>
+    <script>
+        let ids = ["#main", "#lustro"];
+        let classes = ["kwadraty", "kwadraty1"];
+        let click = 0;
+        $(document).ready(function () {
+            let elements = [];
+            for (let z = 0; z < 2; z++) {
+                let dlugosc = 5;
+                let left = 0;
+                let top = 0;
+                let obj = {};
+                let nrdiva = 0;
+                $(ids[z]).width(dlugosc * 52 + "px").height(dlugosc * 52 + "px")
+                for (let x = 0; x < dlugosc; x++) {
+                    left = 0;
+                    for (let y = 0; y < dlugosc; y++) {
+                        let div = $("<div>").addClass(classes[z]).css("left", left).css("top", top).addClass("div" + nrdiva)
+                        $(ids[z]).append(div)
+                        left += 52;
+                        nrdiva++;
+                    }
+                    top += 52;
+                }
+                $(".kwadraty").on("click", function () {
+                    $(this).css("background-color", "yellow")
+                })
+            }
+            $(".kwadraty").on("click", function () {
+                $(this).css("background-color", "yellow");
+                let el1 = $(this).css("left");
+                let el2 = $(this).css("top");
+                obj = { "x": el1, "y": el2 }
+                elements.push(obj)
+                console.log(elements);
+                let div = $("<div>").addClass("mirrored").css("right", elements[click].x).css("top", elements[click].y);
+                $("#lustro").append(div)
+                click++;
+            })
+
+        })
+    </script>
+</head>
+
+
+<body>
+    <div id="container">
+        <div id="main"></div>
+        <div id="odstep"></div>
+        <div id="lustro"></div>
+    </div>
+</body>
+
+</html>

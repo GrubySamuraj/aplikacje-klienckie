@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zadanie 3a Dragosz Jakub 3i1 gr1</title>
+    <style>
+        #div1 {
+            height: 100px;
+            width: 100px;
+            background-color: blueviolet;
+        }
+    </style>
+
+    <script src="libs/jq.js"></script>
+    <script>
+        $(document).ready(function () {
+            let szer = $("#div1").width();
+            let wys = $("#div1").height();
+            $("#div1").width(szer);
+            $("#div1").height(wys);
+            $("#przycisk").on("click", function () {
+                const potw = confirm("Czy chcesz powiększyć diva 3 krotnie?");
+                if (potw === true) {
+                    szer = szer * 2
+                    wys = wys * 2
+                    $("#div1").width(szer)
+                    $("#div1").height(wys)
+                }
+                else {
+                    szer = szer / 3;
+                    wys = wys / 3;
+                    $("#div1").width(szer)
+                    $("#div1").height(wys)
+                }
+            })
+
+        })
+    </script>
+</head>
+
+<body>
+    <div id="div1"> </div>
+    <button id="przycisk"> klik</button>
+</body>
+
+</html>

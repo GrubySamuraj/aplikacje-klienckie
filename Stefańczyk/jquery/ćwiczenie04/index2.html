@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="libs/jq.js"></script>
+    <style>
+        .kwadraty {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            border: 1px solid black;
+        }
+
+        #main {
+            position: relative;
+            top: 20px;
+        }
+
+        #green {
+            background-color: green;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            position: relative;
+            top: 252px;
+        }
+
+        #yellow {
+            background-color: blue;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            position: relative;
+            top: 252px;
+        }
+    </style>
+    <script>
+        let squares = [];
+        let posy = 0;
+        let divnumber = 0;
+        let obj = {};
+        let r = 0;
+        let p = 1;
+        $(document).ready(function () {
+            let iloscklockow = 5;
+            let ilosckliknec = 0;
+            for (let x = 0; x < iloscklockow; x++) {
+                let posx = 0;
+                for (let y = 0; y < iloscklockow; y++) {
+                    let kwadraty = $("<div>").css("left", posx).css("top", posy).addClass('kwadraty').attr('id', `div${divnumber}`);
+                    $('#main').css("width", (iloscklockow * 50 + "px"));
+                    $('#main').css("height", (iloscklockow * 50 + "px"));
+                    $("#main").append(kwadraty);
+                    posx += 50;
+                    divnumber++;
+                }
+                posy += 50
+            }
+            $(".kwadraty").on("click", function () {
+                $(this).css("background-color", "yellow")
+                let divid = $(this).attr("id");
+                let thisposx = $(this).css('left');
+                let thisposy = $(this).css('top')
+                obj = { posx: thisposx, posy: thisposy };
+                squares.push(obj);
+                console.log(squares);
+                ilosckliknec++;
+            })
+            $("#start").on("click", function () {
+                if (squares.length > 2) {
+                    let firstclick = squares[0];
+                    let lastclick = squares[squares.length - 1];
+                    r = squares.length - 2;
+                    p = 1;
+                    let whatcircle = 0
+                    ilosckliknec -= 2;
+                    $("#next").on("click", function () {
+                        console.log("what circle: ", whatcircle);
+                        console.log("ilosc klikniec: ", ilosckliknec);
+                        if (Math.floor(whatcircle / 2) >= Math.floor(ilosckliknec / 2)) {
+                            if (whatcircle % 2 == 0) {
+                                console.log("p:", p);
+                                console.log("squares[p].posx:", squares[p].posx);
+                                $('#green').css('left', squares[p].posx).css("top", squares[p].posy);
+                                p--;
+                                whatcircle++;
+                            }
+                            else {
+                                console.log("squares[r].posx:", squares[r].posx);
+                                $('#yellow').css('left', squares[r].posx).css("top", squares[r].posy);
+                                r++;
+                                whatcircle++;
+                            }
+                        }
+                        else {
+                            if (whatcircle % 2 == 0) {
+                                console.log("squares[p].posx:", squares[p].posx);
+                                $('#green').css('left', squares[p].posx).css("top", squares[p].posy);
+                                p++;
+                                whatcircle++;
+                            }
+                            else {
+                                console.log("squares[r].posx:", squares[r].posx);
+                                $('#yellow').css('left', squares[r].posx).css("top", squares[r].posy);
+                                r--;
+                                whatcircle++;
+                            }
+                        }
+                    })
+                    $("#green").css("position", "absolute").css('left', firstclick.posx).css("top", firstclick.posy).css("z-index", 1);
+                    $("#yellow").css("position", "absolute").css('left', lastclick.posx).css("top", lastclick.posy).css("z-index", 1);
+                }
+                else {
+                    alert("Proszę wcisnąć więcej kwadratów");
+                    $(".kwadraty").css("background-color", "transparent");
+                    squares = [];
+                    posy = 0;
+                    divnumber = 0;
+                    obj = {};
+                    ilosckliknec = 0;
+                    whatcircle = 0;
+                }
+            })
+            $("#reset").on("click", function () {
+                //     let iloscklockow = 5;
+                // let ilosckliknec = 0;
+                // for (let x = 0; x < iloscklockow; x++) {
+                //     let posx = 0;
+                //     for (let y = 0; y < iloscklockow; y++) {
+                //         let kwadraty = $("<div>").css("left", posx).css("top", posy).addClass('kwadraty').attr('id', `div${divnumber}`);
+                //         $('#main').css("width", (iloscklockow * 50 + "px"));
+                //         $('#main').css("height", (iloscklockow * 50 + "px"));
+                //         $("#main").append(kwadraty);
+                //         posx += 50;
+                //         divnumber++;
+                //     }
+                //     posy += 50
+                // }
+                squares = [];
+                posy = 0;
+                divnumber = 0;
+                obj = {};
+                ilosckliknec = 0;
+                whatcircle = 0;
+                $(".kwadraty").css("background-color", "transparent");
+                $("#green").css("position", "relative").css('left', "0px").css("top", "252px").css("z-index", 0);
+                $("#yellow").css("position", "relative").css('left', "0px").css("top", "252px").css("z-index", 0);
+            })
+
+        })
+    </script>
+</head>
+
+<body>
+    <h1>T:Labirynt</h1>
+    <button id="start">Start</button>
+    <button id="next">Next move</button>
+    <button id="reset">Reset</button>
+    <div id="main">
+        <div id="green"></div>
+        <div id="yellow"></div>
+    </div>
+</body>
+
+</html>
