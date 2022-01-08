@@ -8,10 +8,38 @@
     <title>Document</title>
     <style>
         .pole {
-            background-color: gray;
             width: 50px;
             height: 50px;
             border: black 1px solid;
+            position: absolute;
+            background-repeat: no-repeat;
+            background-size: 50px;
+            font-size: 45px;
+            text-align: center;
+        }
+
+        .pustepole {
+            background-image: url(img/klepa.PNG);
+        }
+
+        #poleminowe {
+            position: relative;
+        }
+
+        .minaprzegrana {
+            background-image: url(img/bomb.PNG);
+        }
+
+        .minawygrana {
+            background-image: url(img/pbomb.PNG);
+        }
+
+        .pytajnik {
+            background-image: url(img/pyt.png);
+        }
+
+        .flaga {
+            background-image: url(img/flaga.PNG);
         }
     </style>
 </head>
@@ -25,37 +53,294 @@
         <label for="height">height</label>
         <br>
         <input type="text" name="miny" id="miny">
-        <label for="height">miny</label>
+        <label for="miny">miny</label>
         <br>
         <button id="przyciszczek">Done</button>
     </div>
+    <div id="ilemin"></div>
+    <div id="czas"></div>
     <div id="poleminowe">
     </div>
     <script>
+        let czas3 = 0;
         let game = {
-            plansza:[],
+            plansza: [],
+            miny: parseInt(document.getElementById("miny").value),
+            realminy: parseInt(document.getElementById("miny").value),
+            loop: parseInt(0),
+            rekurencja: 0,
+            Autoodkrywanie(x, y) {
+                if (game.plansza[x]?.[y] && game.plansza[x][y].iloscmin == 0) {
+                    game.plansza[x][y].element.classList.remove("pustepole");
+                }
+                // for (let a = -1; a < 2; a++) {
+                //     for (let b = -1; b < 2; b++) {
+                //         if (game.plansza[x + a]?.[y + b] && game.plansza[x + a][y + b].iloscmin == 0 && y + b > 0) {
+                //             if (x + a >= 0 && x + a <= game.plansza.length) {
+                //                 game.plansza[x + a][y].element.classList.remove("pustepole");
+                //                 game.Autoodkrywanie(x + a, y);
+                //             }
+                //             if (y + b >= 0 && y + b <= game.plansza.length) {
+                //                 game.plansza[x][y + b].element.classList.remove("pustepole");
+                //             }
+
+                //         }
+                //     }
+                // }
+                //zrobic taki kwadrat jak w statkach
+                // if (game.plansza[x]?.[y + 1] && game.plansza[x][y + 1].iloscmin == 0) {
+                //     game.plansza[x][y + 1].element.classList.remove("pustepole");
+                //     game.Autoodkrywanie(x, y + 1);
+                // }
+                // else if (game.plansza[x]?.[y + 1] && game.plansza[x][y + 1].iloscmin != 0 && game.plansza[x][y + 1].iloscmin != undefined) {
+                //     game.plansza[x][y + 1].element.classList.remove("pustepole");
+                //     game.plansza[x][y + 1].element.innerHTML = game.plansza[x][y + 1].iloscmin;
+                //     game.Autoodkrywanie(x, y + 1);
+                //     game.pionowe = false
+                // }
+                // if (game.plansza[x + 1]?.[y] && game.plansza[x + 1][y].iloscmin == 0) {
+                //     game.plansza[x + 1][y].element.classList.remove("pustepole");
+                //     game.Autoodkrywanie(x + 1, y);
+                // }
+                if (game.rekurencja % 2 == 0) {
+                    if (game.plansza[x]?.[y - 1] && game.plansza[x][y - 1].iloscmin == 0) {
+                        game.plansza[x][y - 1].element.classList.remove("pustepole");
+                        game.Autoodkrywanie(x, y - 1);
+                    }
+                    else if (game.plansza[x]?.[y - 1] && game.plansza[x][y - 1].iloscmin != 0 && game.plansza[x][y - 1].iloscmin != undefined) {
+                        game.plansza[x][y - 1].element.classList.remove("pustepole");
+                        game.plansza[x][y - 1].element.innerHTML = game.plansza[x][y - 1].iloscmin;
+                        game.Autoodkrywanie(x, y - 1);
+                    }
+                    if (game.plansza[x - 1]?.[y] && game.plansza[x - 1][y].iloscmin == 0) {
+                        game.plansza[x - 1][y].element.classList.remove("pustepole");
+                        game.Autoodkrywanie(x - 1, y);
+                    }
+                    else if (game.plansza[x - 1]?.[y] && game.plansza[x - 1][y].iloscmin != 0 && game.plansza[x - 1][y].iloscmin != undefined) {
+                        game.plansza[x - 1][y].element.classList.remove("pustepole");
+                        game.plansza[x - 1][y].element.innerHTML = game.plansza[x - 1][y].iloscmin;
+                        game.Autoodkrywanie(x - 1, y);
+                    }
+                }
+                else if (game.rekurencja % 2 == 1) {
+                    if (game.plansza[x]?.[y + 1] && game.plansza[x][y + 1].iloscmin == 0) {
+                        game.plansza[x][y + 1].element.classList.remove("pustepole");
+                        game.Autoodkrywanie(x, y + 1);
+                    }
+                    else if (game.plansza[x]?.[y + 1] && game.plansza[x][y + 1].iloscmin != 0 && game.plansza[x][y + 1].iloscmin != undefined) {
+                        game.plansza[x][y + 1].element.classList.remove("pustepole");
+                        game.plansza[x][y + 1].element.innerHTML = game.plansza[x][y + 1].iloscmin;
+                        game.Autoodkrywanie(x, y + 1);
+                        game.pionowe = false
+                    }
+                    if (game.plansza[x + 1]?.[y] && game.plansza[x + 1][y].iloscmin == 0) {
+                        game.plansza[x + 1][y].element.classList.remove("pustepole");
+                        game.Autoodkrywanie(x + 1, y);
+                    }
+                }
+            },
+            clickdiv() {
+                for (let x = 0; x < game.plansza.length; x++) {
+                    for (let y = 0; y < game.plansza.length; y++) {
+                        if (game.plansza[x][y].element == this) {
+                            if (game.plansza[x][y].iloscmin == 0) {
+                                pionowo = 0;
+                                game.Autoodkrywanie(x, y);
+                                this.classList.remove("pustepole");
+                            }
+                            else {
+                                if (game.plansza[x][y].status != "mina") {
+                                    this.innerHTML = game.plansza[x][y].iloscmin;
+                                    this.classList.remove("pustepole");
+                                }
+                                else {
+                                    game.plansza[x][y].status = "minaprzegrana"
+                                    game.Przegrana(this);
+                                }
+                            }
+                        }
+                    }
+                }
+                this.removeEventListener("click", game.clickdiv);
+                this.removeEventListener("contextmenu", game.rightclickdiv)
+            },
+            rightclickdiv(e) {
+                e.preventDefault();
+                for (let x = 0; x < game.plansza.length; x++) {
+                    for (let y = 0; y < game.plansza.length; y++) {
+                        if (game.plansza[x][y].element == this) {
+                            game.plansza[x][y].rclick++;
+                            if (game.plansza[x][y].rclick > 2) {
+                                game.plansza[x][y].rclick = 0;
+                            }
+                            if (game.plansza[x][y].rclick == 0) {
+                                this.classList.add("pustepole");
+                                this.classList.remove("pytajnik");
+                                this.classList.remove("flaga");
+                            }
+                            else if (game.plansza[x][y].rclick == 1) {
+                                if (game.plansza[x][y].status == "mina") {
+                                    game.realminy--;
+                                }
+                                this.classList.remove("pustepole");
+                                this.classList.remove("pytajnik");
+                                this.classList.add("flaga");
+                                game.miny--;
+
+                            }
+                            else {
+                                this.classList.remove("pustepole");
+                                this.classList.add("pytajnik");
+                                this.classList.remove("flaga");
+                                game.miny++;
+                            }
+                        }
+                    }
+                }
+                if (game.realminy == 0) {
+                    game.Wygrana()
+                }
+                document.getElementById("ilemin").innerHTML = "Pozostało: " + game.miny + "min";
+            },
+            Reveal() {
+                for (let x = 0; x < game.plansza.length; x++) {
+                    for (let y = 0; y < game.plansza.length; y++) {
+                        if (game.plansza[x][y].status != "mina") {
+                            if (game.plansza[x][y].iloscmin != 0 && game.plansza[x][y].status != "minaprzegrana") {
+                                game.plansza[x][y].element.innerHTML = game.plansza[x][y].iloscmin;
+                            }
+                            game.plansza[x][y].element.classList.remove("pustepole");
+                            game.plansza[x][y].element.classList.remove("pytajnik");
+                            game.plansza[x][y].element.classList.remove("flaga");
+                        }
+                        else {
+                            game.plansza[x][y].element.classList.remove("pustepole");
+                            game.plansza[x][y].element.classList.add("minawygrana");
+                        }
+                    }
+                }
+                clearInterval(interwal);
+            },
+            Przegrana(element1) {
+                alert("Niestety, ale przegrałeś :<");
+                element1.classList.add("minaprzegrana");
+                game.Reveal();
+            },
+            Wygrana() {
+                alert("Wygrałeś, gratulacje!, twój czas to: " + czas3 / 1000 + "[s]");
+                game.Reveal();
+            },
             createBigDiv: function () {
-                document.getElementById("przyciszczek").onclick =  () => {
+                document.getElementById("przyciszczek").onclick = () => {
+                    czas1 = Date.now();
+                    interwal = window.setInterval(function () {
+                        czas2 = Date.now();
+                        czas3 = czas2 - czas1;
+                        czas4 = Math.floor(czas3 / 1000);
+                        document.getElementById("czas").innerHTML = czas4 + "s";
+                    }, 1)
                     let width = document.getElementById("width").value
                     let height = document.getElementById("height").value
                     let miny = document.getElementById("miny").value
+                    game.miny = miny;
+                    game.realminy = parseInt(document.getElementById("miny").value);
                     let left = 0;
                     let top = 0;
+                    let pole = {};
+                    let row = []
+                    let div = document.createElement("div");
+                    let pionowo = 0;
+                    document.getElementById("ilemin").innerHTML = "Pozostało: " + miny + "min";
                     for (let x = 0; x < width; x++) {
+                        row = []
                         for (let y = 0; y < height; y++) {
-                            let div = document.createElement("div");
+                            div = document.createElement("div");
                             div.style.left = left + "px"
                             left += 52;
+                            div.style.top = top + "px"
                             div.classList.add("pole");
+                            div.classList.add("pustepole");
+                            pole = { element: div, iloscmin: 0, rclick: 0 }
                             document.getElementById("poleminowe").appendChild(div)
-                            this.plansza.push(div)
+                            row.push(pole);
+                        }
+                        this.plansza.push(row)
+                        top += 50
+                        left = 0;
+                    }
+                    this.insertMines();
+                    for (let x = 0; x < width; x++) {
+                        for (let y = 0; y < height; y++) {
+                            div = this.plansza[x][y].element
+                            div.addEventListener("click", this.clickdiv);
+                            div.addEventListener("contextmenu", this.rightclickdiv)
+                        }
+                    }
+                }
+            },
+            insertMines() {
+                let minax = Math.floor(Math.random() * game.plansza.length);
+                let minay = Math.floor(Math.random() * game.plansza.length);
+                let kroki = 0;
+                let miny = parseInt(document.getElementById("miny").value);
+                let iloscmin = 0;
+                while (kroki < miny) {
+                    minax = Math.floor(Math.random() * game.plansza.length);
+                    minay = Math.floor(Math.random() * game.plansza.length);
+                    if (game.plansza[minay][minax].status != "mina") {
+                        game.plansza[minay][minax].status = "mina"
+                        kroki++
+                    }
+                }
+                for (let y = 0; y < this.plansza.length; y++) {
+                    for (let x = 0; x < this.plansza.length; x++) {
+                        if (game.plansza[y][x].status == "mina") {
+                            if (game.plansza[y - 1]?.[x - 1]) {
+                                if (game.plansza[y - 1][x - 1].status != "mina") {
+                                    game.plansza[y - 1][x - 1].iloscmin += 1;
+                                }
+                            }
+                            if (game.plansza[y - 1]?.[x]) {
+                                if (game.plansza[y - 1][x].status != "mina") {
+                                    game.plansza[y - 1][x].iloscmin += 1;
+                                }
+                            }
+                            if (game.plansza[y - 1]?.[x + 1]) {
+                                if (game.plansza[y - 1][x + 1].status != "mina") {
+                                    game.plansza[y - 1][x + 1].iloscmin += 1;
+                                }
+                            }
+                            if (game.plansza[y]?.[x - 1]) {
+                                if (game.plansza[y][x - 1].status != "mina") {
+                                    game.plansza[y][x - 1].iloscmin += 1;
+                                }
+                            }
+                            if (game.plansza[y]?.[x + 1]) {
+                                if (game.plansza[y][x + 1].status != "mina") {
+                                    game.plansza[y][x + 1].iloscmin += 1;
+                                }
+                            }
+                            if (game.plansza[y + 1]?.[x - 1]) {
+                                if (game.plansza[y + 1][x - 1].status != "mina") {
+                                    game.plansza[y + 1][x - 1].iloscmin += 1;
+                                }
+                            }
+                            if (game.plansza[y + 1]?.[x]) {
+                                if (game.plansza[y + 1][x].status != "mina") {
+                                    game.plansza[y + 1][x].iloscmin += 1;
+                                }
+                            }
+                            if (game.plansza[y + 1]?.[x + 1]) {
+                                if (game.plansza[y + 1][x + 1].status != "mina") {
+                                    game.plansza[y + 1][x + 1].iloscmin += 1;
+                                }
+                            }
+                            delete game.plansza[y][x].iloscmin;
                         }
                     }
                 }
             }
         }
-        //tablica elementów
-        
 
         game.createBigDiv()
 
