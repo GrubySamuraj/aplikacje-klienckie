@@ -70,7 +70,7 @@
 
         #rekordy {
             position: relative;
-            width: auto;
+            width: 500px;
         }
 
         th {
@@ -122,116 +122,55 @@
                 if (game.plansza[x]?.[y] && game.plansza[x][y].iloscmin == 0) {
                     game.plansza[x][y].element.classList.remove("pustepole");
                 }
-                // for (let a = -1; a < 2; a++) {
-                //     for (let b = -1; b < 2; b++) {
-                //         if (game.plansza[x + a]?.[y + b] && game.plansza[x + a][y + b].iloscmin == 0 && y + b > 0) {
-                //             if (x + a >= 0 && x + a <= game.plansza.length) {
-                //                 game.plansza[x + a][y].element.classList.remove("pustepole");
-                //                 game.Autoodkrywanie(x + a, y);
-                //             }
-                //             if (y + b >= 0 && y + b <= game.plansza.length) {
-                //                 game.plansza[x][y + b].element.classList.remove("pustepole");
-                //             }
-
-                //         }
-                //     }
-                // }
-                //zrobic taki kwadrat jak w statkach
-                // if (game.plansza[x]?.[y + 1] && game.plansza[x][y + 1].iloscmin == 0) {
-                //     game.plansza[x][y + 1].element.classList.remove("pustepole");
-                //     game.Autoodkrywanie(x, y + 1);
-                // }
-                // else if (game.plansza[x]?.[y + 1] && game.plansza[x][y + 1].iloscmin != 0 && game.plansza[x][y + 1].iloscmin != undefined) {
-                //     game.plansza[x][y + 1].element.classList.remove("pustepole");
-                //     game.plansza[x][y + 1].element.innerHTML = game.plansza[x][y + 1].iloscmin;
-                //     game.Autoodkrywanie(x, y + 1);
-                //     game.pionowe = false
-                // }
-                // if (game.plansza[x + 1]?.[y] && game.plansza[x + 1][y].iloscmin == 0) {
-                //     game.plansza[x + 1][y].element.classList.remove("pustepole");
-                //     game.Autoodkrywanie(x + 1, y);
-                // }
-                if (game.plansza[x]?.[y - 1] && game.plansza[x][y - 1].iloscmin == 0) {
+                if (game.plansza[x]?.[y + 1] && game.plansza[x][y + 1].iloscmin == 0 && game.plansza[x][y + 1].element.classList.contains('pustepole')) {
+                    game.plansza[x][y + 1].element.classList.remove("pustepole");
+                    game.plansza[x][y + 1].element.classList.add("pole0");
+                    game.Autoodkrywanie(x, y + 1);
+                }
+                else if (game.plansza[x]?.[y + 1] && game.plansza[x][y + 1].iloscmin != 0 && game.plansza[x][y + 1].iloscmin != undefined && game.plansza[x][y + 1].element.classList.contains('pustepole')) {
+                    game.plansza[x][y + 1].element.classList.remove("pustepole");
+                    game.plansza[x][y + 1].element.classList.add("pole0");
+                    game.plansza[x][y + 1].element.innerHTML = game.plansza[x][y + 1].iloscmin;
+                    game.Autoodkrywanie(x, y + 1);
+                }
+                if (game.plansza[x + 1]?.[y] && game.plansza[x + 1][y].iloscmin == 0) {
+                    game.plansza[x + 1][y].element.classList.remove("pustepole");
+                    game.plansza[x + 1][y].element.classList.add("pole0");
+                    game.Autoodkrywanie(x + 1, y);
+                }
+                else if (game.plansza[x + 1]?.[y] && game.plansza[x + 1][y].iloscmin != 0 && game.plansza[x + 1][y].iloscmin != undefined && game.plansza[x + 1][y].element.classList.contains('pustepole')) {
+                    game.plansza[x + 1][y].element.classList.remove("pustepole");
+                    game.plansza[x + 1][y].element.classList.add("pole0");
+                    game.plansza[x + 1][y].element.innerHTML = game.plansza[x + 1][y].iloscmin;
+                    game.Autoodkrywanie(x, y + 1);
+                }
+                if (game.plansza[x]?.[y - 1] && game.plansza[x][y - 1].iloscmin == 0 && game.plansza[x][y - 1].element.classList.contains('pustepole')) {
                     game.plansza[x][y - 1].element.classList.remove("pustepole");
+                    game.plansza[x][y - 1].element.classList.add("pole0");
                     game.Autoodkrywanie(x, y - 1);
                 }
-                else if (game.plansza[x]?.[y - 1] && game.plansza[x][y - 1].iloscmin != 0 && game.plansza[x][y - 1].iloscmin != undefined) {
+                else if (game.plansza[x]?.[y - 1] && game.plansza[x][y - 1].iloscmin != 0 && game.plansza[x][y - 1].iloscmin != undefined && game.plansza[x][y - 1].element.classList.contains('pustepole')) {
                     game.plansza[x][y - 1].element.classList.remove("pustepole");
+                    game.plansza[x][y - 1].element.classList.add("pole0");
                     game.plansza[x][y - 1].element.innerHTML = game.plansza[x][y - 1].iloscmin;
-                    game.Autoodkrywanie(x, y - 1);
                 }
-                if (game.plansza[x - 1]?.[y] && game.plansza[x - 1][y].iloscmin == 0) {
+                if (game.plansza[x - 1]?.[y] && game.plansza[x - 1][y].iloscmin == 0 && game.plansza[x - 1][y].element.classList.contains('pustepole')) {
                     game.plansza[x - 1][y].element.classList.remove("pustepole");
+                    game.plansza[x - 1][y].element.classList.add("pole0");
                     game.Autoodkrywanie(x - 1, y);
                 }
-                else if (game.plansza[x - 1]?.[y] && game.plansza[x - 1][y].iloscmin != 0 && game.plansza[x - 1][y].iloscmin != undefined) {
+                else if (game.plansza[x - 1]?.[y] && game.plansza[x - 1][y].iloscmin != 0 && game.plansza[x - 1][y].iloscmin != undefined && game.plansza[x - 1][y].element.classList.contains('pustepole')) {
                     game.plansza[x - 1][y].element.classList.remove("pustepole");
+                    game.plansza[x - 1][y].element.classList.add("pole0");
                     game.plansza[x - 1][y].element.innerHTML = game.plansza[x - 1][y].iloscmin;
-                    game.Autoodkrywanie(x - 1, y);
                 }
-                // if (game.plansza[x]?.[y + 1] && game.plansza[x][y + 1].iloscmin == 0) {
-                //     game.plansza[x][y + 1].element.classList.remove("pustepole");
-                //     game.Autoodkrywanie(x, y + 1);
-                // }
-                // else if (game.plansza[x]?.[y + 1] && game.plansza[x][y + 1].iloscmin != 0 && game.plansza[x][y + 1].iloscmin != undefined) {
-                //     game.plansza[x][y + 1].element.classList.remove("pustepole");
-                //     game.plansza[x][y + 1].element.innerHTML = game.plansza[x][y + 1].iloscmin;
-                //     game.Autoodkrywanie(x, y + 1);
-                //     game.pionowe = false
-                // }
-                // if (game.plansza[x + 1]?.[y] && game.plansza[x + 1][y].iloscmin == 0) {
-                //     game.plansza[x + 1][y].element.classList.remove("pustepole");
-                //     game.Autoodkrywanie(x + 1, y);
-                // }
-                // function odkryjSasiedztwo(a, b) {
-                //     let y = a
-                //     let x = b
-                //     x = parseInt(x)
-                //     y = parseInt(y)
-                //     let x1, x2, y1, y2
-                //     if (x == 0) {
-                //         x1 = 0
-                //     }
-                //     else {
-                //         x1 = x - 1
-                //     }
-
-                //     if (x == width - 1) {
-                //         x2 = width - 1
-                //     }
-                //     else {
-                //         x2 = x + 1
-                //     }
-
-                //     if (y == 0) {
-                //         y1 = 0
-                //     }
-                //     else {
-                //         y1 = y - 1
-                //     }
-
-                //     if (y == height - 1) {
-                //         y2 = height - 1
-                //     }
-                //     else {
-                //         y2 = y + 1
-                //     }
-                //     for (let i = y1; i <= y2; i++) {
-                //         for (let j = x1; j <= x2; j++) {
-                //             if (odkryte[i][j] == 0) {
-                //                 odkryj(i, j)
-                //             }
-                //         }
-                //     }
-
-                // }
             },
             clickdiv() {
                 for (let x = 0; x < game.plansza.length; x++) {
-                    for (let y = 0; y < game.plansza.length; y++) {
+                    for (let y = 0; y < game.plansza[0].length; y++) {
                         if (game.plansza[x][y].element == this) {
                             if (game.plansza[x][y].iloscmin == 0) {
-                                pionowo = 0;
+                                game.plansza[x][y].element.classList.add("pole0");
                                 game.Autoodkrywanie(x, y);
                                 this.classList.remove("pustepole");
                             }
@@ -253,8 +192,8 @@
             },
             rightclickdiv(e) {
                 e.preventDefault();
-                for (let x = 0; x < game.height; x++) {
-                    for (let y = 0; y < game.width; y++) {
+                for (let x = 0; x < game.plansza.length; x++) {
+                    for (let y = 0; y < game.plansza[0].length; y++) {
                         if (game.plansza[x][y].element == this) {
                             game.plansza[x][y].rclick++;
                             if (game.plansza[x][y].rclick > 2) {
@@ -291,7 +230,9 @@
             },
             Reveal() {
                 for (let x = 0; x < game.plansza.length; x++) {
-                    for (let y = 0; y < game.plansza.length; y++) {
+                    for (let y = 0; y < game.plansza[0].length; y++) {
+                        console.log(game.plansza[x][y].element.onclick);
+                        console.log(game.plansza[x][y].element.oncontextmenu);
                         if (game.plansza[x][y].status != "mina") {
                             if (game.plansza[x][y].iloscmin != 0 && game.plansza[x][y].status != "minaprzegrana") {
                                 game.plansza[x][y].element.innerHTML = game.plansza[x][y].iloscmin;
@@ -316,7 +257,7 @@
             Wygrana() {
                 alert("Wygrałeś, gratulacje!, twój czas to: " + czas3 / 1000 + "[s]");
                 game.Reveal();
-                let username = encodeURIComponent(prompt("Proszę podać Twoje zacne imię") + "|");
+                let username = encodeURIComponent(prompt("Proszę podać Twoje zacne imię)") + "|");
                 let czas5 = czas3 / 1000 + "s";
                 let dlugosc = document.getElementById("width").value;
                 let wysokosc = document.getElementById("height").value;
@@ -403,7 +344,6 @@
                     let pole = {};
                     let row = [];
                     let div = document.createElement("div");
-                    let pionowo = 0;
                     document.getElementById("ilemin").innerHTML = "Pozostało: " + miny + "min";
                     game.rekord();
                     for (let x = 0; x < width; x++) {
@@ -424,9 +364,10 @@
                         left = 0;
                     }
                     this.insertMines();
-                    for (let x = 0; x < width; x++) {
-                        for (let y = 0; y < height; y++) {
+                    for (let x = 0; x < game.plansza.length; x++) {
+                        for (let y = 0; y < game.plansza[0].length; y++) {
                             div = this.plansza[x][y].element
+                            console.log(div);
                             div.addEventListener("click", this.clickdiv);
                             div.addEventListener("contextmenu", this.rightclickdiv)
                         }
@@ -434,21 +375,22 @@
                 }
             },
             insertMines() {
-                let minax = Math.floor(Math.random() * game.plansza.length);
+                let minax = Math.floor(Math.random() * game.plansza[0].length);
                 let minay = Math.floor(Math.random() * game.plansza.length);
                 let kroki = 0;
                 let miny = parseInt(document.getElementById("miny").value);
                 let iloscmin = 0;
                 while (kroki < miny) {
-                    minax = Math.floor(Math.random() * game.plansza.length);
+                    minax = Math.floor(Math.random() * game.plansza[0].length);
                     minay = Math.floor(Math.random() * game.plansza.length);
                     if (game.plansza[minay][minax].status != "mina") {
                         game.plansza[minay][minax].status = "mina"
+                        game.plansza[minay][minax].kliknieta = "nie"
                         kroki++
                     }
                 }
                 for (let y = 0; y < this.plansza.length; y++) {
-                    for (let x = 0; x < this.plansza.length; x++) {
+                    for (let x = 0; x < this.plansza[0].length; x++) {
                         if (game.plansza[y][x].status == "mina") {
                             if (game.plansza[y - 1]?.[x - 1]) {
                                 if (game.plansza[y - 1][x - 1].status != "mina") {
