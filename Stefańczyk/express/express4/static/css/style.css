@@ -9,3 +9,10 @@
 .index {
     text-decoration: underline;
 }
+.lektury{
+    background-color: #DDDDDD;
+    border-radius: 5px;
+    color:blue;
+    padding: 2px;
+    margin: 10px;
+}
