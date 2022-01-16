@@ -1,0 +1,16 @@
+<div id="menu">
+    <a href="/" class="elmenu">main</a>
+    <a href="/register" class="elmenu">register</a>
+    <a href="/login" class="elmenu">login</a>
+    <a href="/admin" class="elmenu">admin</a>
+    <a href="/logout" class="elmenu">logout</a>
+</div>
+<div id="menuadmina">
+    <a href="/sort" class="elmenuadmina">sort</a>
+    <a href="/show" class="elmenuadmina">show</a>
+    <a href="/gender" class="elmenuadmina">gender</a>
+</div>
+<form onchange="this.submit()" action="/sort" method="POST">
+    <input type="radio" value="rosnaco" name="sort" id="rosnaco">rosnąco
+    <input type="radio" value="malejaco" name="sort" id="malejaco">malejąco
+</form>

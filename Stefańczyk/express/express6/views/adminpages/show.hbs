@@ -1,0 +1,35 @@
+<div id="menu">
+    <a href="/" class="elmenu">main</a>
+    <a href="/register" class="elmenu">register</a>
+    <a href="/login" class="elmenu">login</a>
+    <a href="/admin" class="elmenu">admin</a>
+    <a href="/logout" class="elmenu">logout</a>
+</div>
+<div id="menuadmina">
+    <a href="/sort" class="elmenuadmina">sort</a>
+    <a href="/show" class="elmenuadmina">show</a>
+    <a href="/gender" class="elmenuadmina">gender</a>
+</div>
+{{#each users}}
+<table id="table1">
+    <tr id="wiersz">
+        <td>id: {{id}}</td>
+        <td>login: {{login}} - {{haslo}}</td>
+        <td>uczeń:
+            {{#if uczen}}
+            <input type="checkbox" checked disabled>
+            {{else}}
+            <input type="checkbox" disabled>
+            {{/if}}
+        </td>
+        <td>wiek: {{wiek}}</td>
+        <td>płeć:
+            {{#if plec}}
+            {{plec}}
+            {{else}}
+            undefined
+            {{/if}}
+        </td>
+    </tr>
+</table>
+{{/each}}

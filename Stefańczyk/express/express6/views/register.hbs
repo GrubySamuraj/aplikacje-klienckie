@@ -1,0 +1,72 @@
+<div id="menu">
+    <a href="/" class="elmenu">main</a>
+    <a href="/register" class="elmenu">register</a>
+    <a href="/login" class="elmenu">login</a>
+    <a href="/admin" class="elmenu">admin</a>
+</div>
+<table>
+    <form action="/register" method="POST">
+        <tr>
+            <td><label for="login">login:</label></td>
+            <td><input type="text" name="login"></td>
+        </tr>
+        <tr>
+            <td><label for="password">Hasło:</label></td>
+            <td><input type="password" name="password"></td>
+        </tr>
+        <tr>
+            <td>
+                Wiek:
+            </td>
+            <td>
+                <select name="wiek" id="wiek">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="uczen">uczeń?:</label>
+            </td>
+            <td>
+                <input type="checkbox" name="uczen">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="plec">Płeć: </label>
+            </td>
+            <td>
+                <input type="radio" name="plec" value="K">
+                K
+                <input type="radio" name="plec" value="M">
+                M
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" name="submit" value="Zarejestruj">
+            </td>
+        </tr>
+    </form>
+</table>
