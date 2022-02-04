@@ -1,0 +1,16 @@
+{
+  "dependencies": {
+    "colors": "^1.4.1",
+    "fs": "^0.0.1-security",
+    "tracer": ">0.0.0"
+  },
+  "name": "lekcja01---nodejs---get",
+  "version": "1.0.0",
+  "main": "server09.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
