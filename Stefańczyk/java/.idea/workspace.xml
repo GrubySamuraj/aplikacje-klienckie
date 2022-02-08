@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="afb4b66e-33f1-4102-9c24-a4269c111a78" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../Mendela/helpdesk/.vscode/c_cpp_properties.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Mendela/helpdesk/helloworld.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/java.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/Test.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/arrays.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/konwersje.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/list$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/list$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/list.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/map.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/sets.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/stale.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/zadanie.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/zadanie3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java/zmienne.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/konwersje.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/list.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/map.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sets.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stale.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/zadania.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/zadanie1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/zadanie2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/zadanie3.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/zmienne.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="23VLA3bOZ4obfVG8cB9oQKYsoVk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RunManager" selected="Application.zadanie3_2">
+    <configuration name="cos" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="cos" />
+      <module name="java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="list" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="list" />
+      <module name="java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="zadanie1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="zadanie1" />
+      <module name="java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="zadanie3_2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="zadanie3_2" />
+      <module name="java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="zadanie4" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="zadanie4" />
+      <module name="java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.zadanie3_2" />
+        <item itemvalue="Application.zadanie4" />
+        <item itemvalue="Application.cos" />
+        <item itemvalue="Application.zadanie1" />
+        <item itemvalue="Application.list" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="afb4b66e-33f1-4102-9c24-a4269c111a78" name="Changes" comment="" />
+      <created>1641814163525</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1641814163525</updated>
+      <workItem from="1641814166343" duration="695000" />
+      <workItem from="1641814879844" duration="1050000" />
+      <workItem from="1643610782885" duration="5659000" />
+      <workItem from="1644103892445" duration="623000" />
+      <workItem from="1644107460426" duration="117000" />
+      <workItem from="1644107604706" duration="1000" />
+      <workItem from="1644107624886" duration="17000" />
+      <workItem from="1644164949578" duration="4273000" />
+      <workItem from="1644172364990" duration="2000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

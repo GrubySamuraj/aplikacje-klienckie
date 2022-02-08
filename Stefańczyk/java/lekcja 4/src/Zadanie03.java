@@ -39,9 +39,6 @@ class Zadanie03{
             else if(delta == 0){
                 x1 = (-b / 2 * a);
             }
-            else{
-
-            }
         }
 
         void display() {

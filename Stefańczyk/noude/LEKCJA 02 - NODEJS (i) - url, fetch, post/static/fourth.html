@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h1>URLSearchParams - no form</h1>
+    <input type="text" id="fname" name="txt1"><br><br>
+    <input type="text" id="lname" name="txt2"><br><br>
+    <select name="operacje" id="operations">
+        <option value="suma">Suma</option>
+        <option value="różnica">Różnica</option>
+        <option value="iloczyn">Iloczyn</option>
+        <option value="iloraz">Iloraz</option>
+        <option value="all">Wszystkie działania</option>
+    </select>
+    <button id="btn">cos</button>
+    <script>
+        document.getElementById("btn").onclick = function () {
+            let data = new URLSearchParams();
+            data.append("txt1", document.getElementById("fname").value);
+            data.append("txt2", document.getElementById("lname").value);
+            data.append("select", document.getElementById("operations").value);
+            const options = {
+                method: "POST",
+                body: data
+            };
+            fetch("/form", options)
+                .then(response => response.json())
+                .then(data => alert(`${data.message}: ${data.wynik}`))
+                .catch(error => console.log(error));
+        };
+
+    </script>
+</body>
+
+</html>

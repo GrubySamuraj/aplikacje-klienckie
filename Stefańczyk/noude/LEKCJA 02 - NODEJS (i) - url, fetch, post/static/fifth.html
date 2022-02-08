@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <h1>Ćwiczenie 05 - fetch - JSON, no form</h1>
+    <input type="text" id="fname" name="txt1"><br><br>
+    <input type="text" id="lname" name="txt2"><br><br>
+    <button id="btn">cos</button>
+    <script>
+        document.getElementById("btn").onclick = function () {
+            const data = JSON.stringify({
+                txt1: document.getElementById("fname").value,
+                txt2: document.getElementById("lname").value,
+            })
+            const options = {
+                method: "POST",
+                body: data
+            };
+            fetch("/nazwiska", options)
+                .then(response => response.json()) // konwersja na json
+                .then(data => alert(JSON.stringify(data, null, 5))) // dane odpowiedzi z serwera
+                .catch(error => console.log(error));
+        };
+
+    </script>
+</body>
+
+</html>
