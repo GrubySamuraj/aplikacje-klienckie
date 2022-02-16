@@ -23,10 +23,6 @@ function serverResponse(req, res) {
     })
     req.on("end", function (data) {
         console.log(body);
-        const options = {
-            method: "POST",
-            body: data
-        };
         res.writeHead(200, { "Content-type": "text/plain;charset=utf-8" });
         res.end(JSON.stringify(body, null, 5));
     })

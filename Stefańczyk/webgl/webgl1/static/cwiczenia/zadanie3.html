@@ -36,7 +36,7 @@
 
         // const color = Color(rgb)
 
-        const material = new THREE.MeshPhongMaterial({
+        const material = new THREE.MeshNormalMaterial({
             color: 0x049ef4,
             side: THREE.FrontSide,
             wireframe: false,
@@ -53,7 +53,6 @@
         scene.add(light);
         scene.add(light2);
         const cube = new THREE.Mesh(geometry, material);
-        cube.material.color.setHex(0xfedcba);
         scene.add(cube);
         const axes = new THREE.AxesHelper(1000);
         scene.add(axes);

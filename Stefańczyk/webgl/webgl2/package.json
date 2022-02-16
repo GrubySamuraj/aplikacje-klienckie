@@ -1,0 +1,12 @@
+{
+  "name": "webgl2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "4.17.2",
+    "fs":"0.0.1-security"
+  },
+  "author": "",
+  "license": "ISC"
+}

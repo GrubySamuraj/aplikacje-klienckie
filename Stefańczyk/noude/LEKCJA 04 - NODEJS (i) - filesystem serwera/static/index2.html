@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <h1>06 - czytanie plików wyslanych plików </h1>
+    <form action="/fileupload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file">
+        <input type="submit" value="Przeslij" id="btn">
+    </form>
+    <div id="lista"></div>
+
+
+    <script>
+        document.getElementById("btn").addEventListener("click", function () {
+            let val = document.getElementById("file").value
+            console.log(typeof (val));
+            const data = JSON.stringify({
+                val: val
+            })
+            const options = {
+                method: "POST",
+                body: data
+            };
+            fetch("/files", options)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("git");
+                })
+                .catch(error => console.log(error));
+        })
+    </script>
+</body>
+
+</html>

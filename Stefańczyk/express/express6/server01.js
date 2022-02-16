@@ -39,7 +39,6 @@ app.post("/register", function (req, res) {
             pomlogin++
         }
     }
-    console.log(pomlogin,users.length);
     if (pomlogin == users.length){
         users.push(user);
         res.send(`<script>alert("Udało się zarejestrować!"); window.location.href = "/register"; </script>`);
@@ -59,8 +58,9 @@ app.post("/login",function(req,res){
         haslo: req.body.password
     }
     for(let i = 0; i < users.length; i++){
-        if(users[i].login == user.login && users[i].password == user.password){
+        if(users[i].login == user.login && users[i].haslo == user.haslo){
             pomlogin1++
+            console.log("test: ",users[i]);
         }
     }
     if (pomlogin1 == 1){
