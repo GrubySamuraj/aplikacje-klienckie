@@ -22,7 +22,7 @@ function serverResponse(req, res) {
         body += data.toString();
     })
 
-    req.on("end", function (data) {
+    req.on("end", function () {
         const params = new URLSearchParams(body);
         const finishObj = Object.fromEntries(params);
         console.log(finishObj);

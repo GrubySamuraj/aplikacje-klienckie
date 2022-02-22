@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/three.js"></script>
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="btn">Włącz/Wyłącz poruszanie</button>
+    <div id="root"></div>
+    <script>
+        let angle = 0;
+        let cos = 0;
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+            45, // kąt patrzenia kamery (FOV - field of view)
+            window.innerWidth / window.innerHeight, // proporcje widoku, powinny odpowiadać proporcjom naszego ekranu przeglądarki
+            0.1, // minimalna renderowana odległość
+            10000 // maksymalna renderowana odległość od kamery
+        );
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(0xffffff);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        $("#root").append(renderer.domElement);
+        const geometry = new THREE.BoxGeometry(50, 50, 50);
+
+        new THREE.MeshPhongMaterial({
+            color: 0xff0000,
+            specular: 0xffffff,
+            shininess: 50,
+            side: THREE.DoubleSide,
+            map: new THREE.TextureLoader().load("https://i.imgur.com/34NeeMh.jpeg"),
+        });
+
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        const axes = new THREE.AxesHelper(1000);
+        scene.add(axes);
+        camera.position.set(100, 0, 100);
+        camera.lookAt(scene.position);
+        $("#btn").on("click", function () {
+            if (cos == 0) {
+                cos = 0.05;
+            }
+            else {
+                cos = 0;
+            }
+        })
+
+        function render() {
+            camera.position.y = Math.sin(angle) * 100
+            console.log(camera.position.y);
+            angle += cos
+
+            cube.rotation.y += 0.01;
+            camera.updateProjectionMatrix();
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
+        render();
+    </script>
+</body>
+
+</html>

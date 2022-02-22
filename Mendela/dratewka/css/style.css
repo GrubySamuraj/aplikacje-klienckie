@@ -1,0 +1,55 @@
+@font-face {
+    font-family: "CustomFont";
+    src: url("../content/fonts/pressstart2p-webfont.woff") format("woff"),
+        url('../content/fonts/PressStart2P.ttf') format('truetype');
+}
+body {
+    margin: 0;
+    background-color: #888;
+    font-family: "CustomFont";
+    font-size: 25px;
+}
+
+#screen {
+    background-color: #333333;
+    color: #CCCCCC;
+    width: 1000px;
+    height: 700px;
+    left: 450px;
+    position: absolute;
+}
+#obrazek{
+    float: left;
+}
+#kompas{
+    padding: 30px;
+    position: relative;
+    float: right;
+}
+#obrazek{
+    position: relative;
+    padding: 30px;
+}
+#obrazekimg{
+    border: 2px #999999 solid;
+    background-color: rgb(235,211,64);
+    width: 350px;
+    height: 250px;
+}
+#kompasimg{
+    width: 330px;
+    height: 180px;
+    top: 75px;
+    position:relative;
+}
+#container{
+    width: 100%;
+    position: relative;
+    float: left;
+}
+#info{
+    padding: 30px;
+}
+#title{
+    padding: 30px 30px 0px;
+}

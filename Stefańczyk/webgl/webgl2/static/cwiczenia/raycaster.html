@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/three.js"></script>
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        let cuberot = false;
+        let cuberot1 = false;
+        let cuberot2 = false;
+        const raycaster = new THREE.Raycaster(); // obiekt Raycastera symulujący "rzucanie" promieni
+        const mouseVector = new THREE.Vector2() // ten wektor czyli pozycja w przestrzeni 2D na ekranie(x,y) wykorzystany będzie do określenie pozycji myszy na ekranie, a potem przeliczenia na pozycje 3D
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+            45, // kąt patrzenia kamery (FOV - field of view)
+            window.innerWidth / window.innerHeight, // proporcje widoku, powinny odpowiadać proporcjom naszego ekranu przeglądarki
+            0.1, // minimalna renderowana odległość
+            10000 // maksymalna renderowana odległość od kamery
+        );
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(0xffffff);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        $("#root").append(renderer.domElement);
+        const geometry = new THREE.BoxGeometry(20, 20, 20);
+
+        let geometries = [];
+        const materials = [];
+        materials.push(new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: new THREE.TextureLoader().load('https://lh3.googleusercontent.com/J2NRVx0rC1EfAcG3qNVWNMUuMMu12yLnwuZiuP-ZuaKCND7hDNND0B7o-ZydeTZvQ_pZYS8UDfYHWR-o7b09=s400') })); //piston top
+        materials.push(new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: new THREE.TextureLoader().load('https://lh3.googleusercontent.com/J2NRVx0rC1EfAcG3qNVWNMUuMMu12yLnwuZiuP-ZuaKCND7hDNND0B7o-ZydeTZvQ_pZYS8UDfYHWR-o7b09=s400') })); //
+        materials.push(new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: new THREE.TextureLoader().load('https://media.istockphoto.com/vectors/pixel-background-the-concept-of-games-background-squares-pattern-vector-id1325021736?k=20&m=1325021736&s=612x612&w=0&h=OG-2RYSkN_REY4yBZI-gobpgSPfi4i6Boxw7zWjZHiE=') })); //góra
+        materials.push(new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: new THREE.TextureLoader().load('https://lh3.googleusercontent.com/J2NRVx0rC1EfAcG3qNVWNMUuMMu12yLnwuZiuP-ZuaKCND7hDNND0B7o-ZydeTZvQ_pZYS8UDfYHWR-o7b09=s400') }));
+        materials.push(new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: new THREE.TextureLoader().load('https://lh3.googleusercontent.com/J2NRVx0rC1EfAcG3qNVWNMUuMMu12yLnwuZiuP-ZuaKCND7hDNND0B7o-ZydeTZvQ_pZYS8UDfYHWR-o7b09=s400') }));
+        materials.push(new THREE.MeshBasicMaterial({ side: THREE.DoubleSide, map: new THREE.TextureLoader().load('https://lh3.googleusercontent.com/J2NRVx0rC1EfAcG3qNVWNMUuMMu12yLnwuZiuP-ZuaKCND7hDNND0B7o-ZydeTZvQ_pZYS8UDfYHWR-o7b09=s400') }));
+
+        const axes = new THREE.AxesHelper(1000);
+        const cube = new THREE.Mesh(geometry, materials);
+        const cube1 = new THREE.Mesh(geometry, materials);
+        const cube2 = new THREE.Mesh(geometry, materials);
+        cube1.position.set(0, 25, 0);
+        cube2.position.set(0, 50, 0);
+
+        scene.add(cube);
+        scene.add(cube1);
+        scene.add(cube2);
+        geometries.push(cube);
+        geometries.push(cube1);
+        geometries.push(cube2);
+        scene.add(axes);
+        camera.position.set(100, 100, 100);
+        camera.lookAt(scene.position);
+
+        $(document).mousedown(function (event) {
+            mouseVector.x = (event.clientX / $(window).width()) * 2 - 1;
+            mouseVector.y = -(event.clientY / $(window).height()) * 2 + 1;
+            raycaster.setFromCamera(mouseVector, camera);
+            const intersects = raycaster.intersectObjects(scene.children);
+            console.log(intersects.length);
+            if (intersects.length > 0) {
+                console.log("id: ", intersects[0].object.id);
+                if (intersects[0].object.id == 11) {
+                    if (cuberot == false) {
+                        cuberot = true;
+                    }
+                    else {
+                        cuberot = false
+                    }
+                }
+                else if (intersects[0].object.id == 12) {
+                    if (cuberot1 == false) {
+                        cuberot1 = true;
+                    }
+                    else {
+                        cuberot1 = false
+                    }
+                }
+                else {
+                    if (cuberot2 == false) {
+                        cuberot2 = true;
+                    }
+                    else {
+                        cuberot2 = false
+                    }
+                }
+            }
+        })
+
+        function render() {
+            if (cuberot == true) {
+                cube.rotation.y += 0.01;
+            }
+            if (cuberot1 == true) {
+                cube1.rotation.y += 0.01;
+            }
+            if (cuberot2 == true) {
+                cube2.rotation.y += 0.01;
+            }
+            camera.updateProjectionMatrix();
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
+        render();
+    </script>
+</body>
+
+</html>
