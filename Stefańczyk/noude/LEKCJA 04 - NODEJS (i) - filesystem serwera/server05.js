@@ -44,7 +44,7 @@ function serverResponse(request, response){
         let datas = [];
         const dirs = async () => {
             try {
-                const data = await fsPromises.readdir(filepath) 
+                const data = await fsPromises.readdir(filepath);
                 for (let i = 0; i < data.length; i++) {
                     const stat = await fsPromises.lstat(`${filepath}/${data[i]}`);
                     obj = {

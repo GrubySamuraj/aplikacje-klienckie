@@ -10,3 +10,21 @@
     <a href="/show" class="elmenuadmina">show</a>
     <a href="/gender" class="elmenuadmina">gender</a>
 </div>
+<h1>Kobiety:</h1>
+<table id="kobiety">
+    {{#each women}}
+    <tr>
+        <td style="width: 500px;">{{this.id}}</td>
+        <td style="width: 500px;">{{this.plec}}</td>
+    </tr>
+    {{/each}}
+</table>
+<h1>Mezczyzni:</h1>
+<table id="mezyzni">
+    {{#each men}}
+    <tr>
+        <td style="width: 500px;">{{this.id}}</td>
+        <td style="width: 500px;">{{#if this.plec}}{{this.plec}}{{else}}undefined{{/if}}</td>
+    </tr>
+    {{/each}}
+</table>

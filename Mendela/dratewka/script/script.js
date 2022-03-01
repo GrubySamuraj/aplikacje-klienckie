@@ -20,12 +20,18 @@ class Plansza{
         document.getElementById("directions").innerHTML += "You are carrying nothing"
     }
 }
-cos = new Plansza("You are inside a brimstone mine","11.gif","rgb(235,211,64)",[`EAST`],"knife");
-cos2 = new Plansza("You are at the entrance to the mine", "12.gif", "rgb(89,93,87)",[`EAST`],"knife");
-cos.load();
-document.addEventListener("click",function(){
-    document.getElementById("input").focus();
-})
-document.getElementById("input").addEventListener("input", function(){
-    this.value = this.value.toLocaleUpperCase();
-})
+let game = {
+    main(){
+        cos = new Plansza("You are inside a brimstone mine","11.gif","rgb(235,211,64)",[`EAST`],"knife");
+        cos2 = new Plansza("You are at the entrance to the mine", "12.gif", "rgb(89,93,87)",[`EAST`],"knife");
+        cos.load();
+        document.addEventListener("click",function(){
+            document.getElementById("input").focus();
+        });
+        document.getElementById("input").addEventListener("input", function(){
+            this.value = this.value.toLocaleUpperCase();
+        });
+    },
+
+}
+game.main();

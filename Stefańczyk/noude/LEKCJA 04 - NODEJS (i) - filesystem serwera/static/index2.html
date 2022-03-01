@@ -16,27 +16,23 @@
         <input type="file" name="file" id="file">
         <input type="submit" value="Przeslij" id="btn">
     </form>
-    <div id="lista"></div>
+    <div id="obrazek">
+        <img src="" alt="Tutaj będzie obrazek">
+    </div>
 
 
     <script>
         document.getElementById("btn").addEventListener("click", function () {
-            let val = document.getElementById("file").value
-            console.log(typeof (val));
-            const data = JSON.stringify({
-                val: val
-            })
             const options = {
-                method: "POST",
-                body: data
+                method: "POST"
             };
-            fetch("/files", options)
+            fetch("/fileupload", options)
                 .then(response => response.json())
                 .then(data => {
-                    console.log("git");
+                    console.log(data);
                 })
                 .catch(error => console.log(error));
-        })
+            });
     </script>
 </body>
 

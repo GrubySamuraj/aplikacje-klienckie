@@ -2,10 +2,9 @@ var fs = require("fs");
 var http = require("http");
 var formidable = require("formidable")
 const path = require("path");
-const filepath = path.join(__dirname, "node_modules/colors");
 const fsPromises = require("fs").promises;
-const form = formidable({});
 let body="";
+const form = formidable({});
 var server = http.createServer(function(request,response){
     switch (request.method) {
         case "GET":
@@ -37,20 +36,42 @@ function pageResponse(request, response){
     }
 }
 function serverResponse(request, response){
-    request.on("data", function (data) {
-        if(typeof(data) == "object"){
-            body += data.toString();
+    const dirs = async () => {
+        try {
+            const data = await fsPromises.readdir(filepath);
+            for (let i = 0; i < data.length; i++) {
+                const stat = await fsPromises.lstat(`${filepath}/${data[i]}`);
+                obj = {
+                    file: data[i],
+                    type: stat.isDirectory()
+                }
+                datas.push(obj);
+            }
+        } catch (error) {
+            console.log(error);
         }
+        for(let x = 0; x < datas.length; x++){
+            for (let y = 0; y < datas.length - 1; y++) {
+                if(datas[y].type == true){
+                    pom = datas[y];
+                    datas[y] = datas[y + 1]
+                    datas[y + 1] = pom
+                }
+            }
+        }
+        datas.reverse();
+        response.writeHead(200, { "Content-type": "text/plain;charset=utf-8" });
+        response.end(JSON.stringify(datas, null, 5));
+    }
+    form.uploadDir = "static/upload/";
+    form.parse(request, function (err, fields, files) {
+        let datas = [];
+        fs.rename(`${files.file.path}`, `${files.file.path}/../${files.file.name}`,  (err)=> {
+            if (err) throw err
+        });
+        datas.push(`${files.file.path}/../${files.file.name}`);
+        console.log(datas);
+        response.writeHead(200, { 'content-type': 'text/plain;charset=utf-8' });
+        response.end(`${files.file.path}/../${files.file.name}`);
     });
-    request.on("end",function(){
-        form.uploadDir = "static/upload/";
-        form.on("file", function () {
-            console.log("plik otrzymany!");
-        });
-        form.parse(request, function (err, fields, files) {
-            console.log("plik zapisany!");
-            // response.writeHead(200, { 'content-type': 'text/plain;charset=utf-8' });
-            // response.end('wszystkich bajtów w formularzu:' + form.bytesExpected + " / " + form.bytesReceived + " bytes");
-        });
-    })
 }

@@ -14,3 +14,43 @@
     <input type="radio" value="rosnaco" name="sort" id="rosnaco">rosnąco
     <input type="radio" value="malejaco" name="sort" id="malejaco">malejąco
 </form>
+
+<table>
+    {{!-- {{#if malejaco}} --}}
+    <tr>
+        <td>{{malejaco}}</td>
+    </tr>
+
+    {{!-- {{/if}} --}}
+    {{!-- {{#each malejaco}}
+    <tr>
+        <td>id: {{this.id}}</td>
+        <td>login: {{this.login}} - {{this.haslo}}</td>
+        <td>uczeń:
+            {{#if uczen}}
+            <input type="checkbox" checked disabled>
+            {{else}}
+            <input type="checkbox" disabled>
+            {{/if}}
+        </td>
+        <td>wiek: {{this.wiek}}</td>
+        <td>płeć:
+            {{#if plec}}
+            {{this.plec}}
+            {{else}}
+            undefined
+            {{/if}}
+        </td>
+    </tr>
+    {{/each}}
+    {{/if}}
+    {{#if rosnaco}}
+    {{#each rosnaco}}
+    <tr>
+        <td>
+            {{this}}
+        </td>
+    </tr>
+    {{/each}}
+    {{/if}} --}}
+</table>

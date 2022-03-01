@@ -4,7 +4,8 @@ const PORT = 3000;
 var path = require("path");
 var hbs = require('express-handlebars');
 const bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended : true }));
+app.use(express.json());
 
 app.use(express.static("static"));
 
@@ -13,10 +14,16 @@ app.engine('hbs', hbs({ defaultLayout: 'main.hbs' }));   // domyślny layout, 
 app.set('view engine', 'hbs');
 let user = {};
 let users = [];
+let women = [];
+let men = [];
+let rosnaco = [];
+let malejaco = [];
 let login = false;
 let pomlogin = 0;
 let pomlogin1 = 0;
 const context = {users:users};
+const context2 = {women:women,men:men}
+const context3 = {rosnaco:rosnaco,malejaco:malejaco}
 
 app.get('/', function (req, res) {
     res.render("index.hbs");
@@ -91,12 +98,24 @@ app.get('/sort', function (req, res) {
         res.render("error.hbs");
     }
 });
-app.post("/sort",function(req,res){
-    
-})
 app.get('/gender', function (req, res) {
     if(login == true){
-        res.render("adminpages/gender.hbs");
+            for(let i = 0; i < users.length; i++){
+                console.log(users[i]);
+                console.log(women);
+                console.log(men);
+                if(users[i].plec == "K"){
+                    women.push({id:users[i].id,plec:users[i].plec})
+                }else{
+                    men.push({id:users[i].id,plec:users[i].plec})
+                }
+                console.log(women);
+                console.log(men);
+            }
+            console.log(context2);
+        res.render("adminpages/gender.hbs", context2);
+        women = [];
+        men = [];
     }
     else{
         res.render("error.hbs");
@@ -109,6 +128,23 @@ app.get('/show', function (req, res) {
     else{
         res.render("error.hbs");
     }
+});
+app.post('/sort', function (req, res) {
+    if(req.body.sort == "rosnaco"){
+        rosnaco = users.sort(function (a, b) {
+            return parseFloat(a.wiek) - parseFloat(b.wiek);
+        });
+    }
+    else{
+        malejaco = users.sort(function (a, b) {
+            return parseFloat(b.wiek) - parseFloat(a.wiek);
+        });
+    }
+    console.log("rosnaco: ",rosnaco);
+    console.log("malejaco: ",malejaco);
+    res.render("adminpages/sort.hbs", context3);
+    malejaco = [];
+    rosnaco = [];
 });
 app.listen(PORT, function () {
     console.log("start serwera na porcie " + PORT);
