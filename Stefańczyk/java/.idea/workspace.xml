@@ -5,37 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="afb4b66e-33f1-4102-9c24-a4269c111a78" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../Mendela/helpdesk/.vscode/c_cpp_properties.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Mendela/helpdesk/helloworld.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/java.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/Test.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/arrays.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/konwersje.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/list$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/list$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/list.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/map.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/sets.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/stale.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/zadanie.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/zadanie3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java/zmienne.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/konwersje.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/list.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/map.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sets.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/stale.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/zadania.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/zadanie1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/zadanie2.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/zadanie3.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/zmienne.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Mendela/dratewka/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../Mendela/dratewka/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Mendela/dratewka/script/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../Mendela/dratewka/script/script.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,6 +105,7 @@
       <workItem from="1644107624886" duration="17000" />
       <workItem from="1644164949578" duration="4273000" />
       <workItem from="1644172364990" duration="2000" />
+      <workItem from="1646583909911" duration="55000" />
     </task>
     <servers />
   </component>

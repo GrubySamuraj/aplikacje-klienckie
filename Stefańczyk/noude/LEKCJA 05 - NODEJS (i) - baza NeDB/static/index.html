@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <h1>05 - czytanie plików katalogów</h1>
+    <button id="btn">Przeczytaj</button>
+    <div id="lista"></div>
+
+    <script>
+        document.getElementById("btn").addEventListener("click", function () {
+            const options = {
+                method: "POST"
+            };
+            fetch("/files", options)
+                .then(response => response.json())
+                .then(data => {
+                    console.log();
+                    for (let x = 0; x < data.length; x++) {
+                        if (data[x].type) {
+                            document.getElementById("lista").innerHTML += `</br> <span style="color: red; ">` + data[x].file + "/</span>";
+                        } else {
+                            document.getElementById("lista").innerHTML += "</br>" + data[x].file;
+                        }
+                    }
+                })
+                .catch(error => console.log(error));
+        })
+    </script>
+</body>
+
+</html>

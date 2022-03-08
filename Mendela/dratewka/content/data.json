@@ -1,0 +1,7 @@
+{
+    "locations":[
+      {"title":"You are inside a brimstone mine", "image":"11.gif","color":"rgb(235,211,64","directions":["EAST"],"item":"knife","x":0,"y":0},
+      {"firstName":"Anna", "lastName":"Smith"},
+      {"firstName":"Peter", "lastName":"Jones"}
+    ]
+}
