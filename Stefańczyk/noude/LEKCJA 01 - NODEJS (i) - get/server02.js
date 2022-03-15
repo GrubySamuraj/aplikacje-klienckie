@@ -1,5 +1,4 @@
 var http = require("http");
-const { rawListeners } = require("process");
 var server = http.createServer(function(req,res){
     console.log("adres żądania: " + req.url)
     res.writeHead(200,{"content-type":"text/html;charset=utf-8"})

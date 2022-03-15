@@ -1,6 +1,11 @@
 
 const Datastore = require('nedb')
 
+const coll1 = new Datastore({
+    filename: 'kolekcja2.db',
+    autoload: true
+});
+
 console.log("PRZED FOR: " + new Date().getMilliseconds())
 for (var i = 0; i < 3; i++) {
     var doc = {

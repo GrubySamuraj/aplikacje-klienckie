@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Proszę podać nazwe pliku: <input type="file" id="file">
+    <button id="send">Wyslij</button>
+    obrazek:
+    <img src="." alt="Tu powienien byc obrazek" id="img">
+
+    <script>
+        document.getElementById("send").onclick = () => {
+            let fd = new FormData();
+            fd.append("file", document.getElementById("file").files[0]);
+            const body = fd;
+            console.log(fd);
+            fetch("/postfile", { method: "post", body })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById("img").setAttribute("src",data);
+                })
+                .catch(error => console.log(error))
+        }
+    </script>
+</body>
+</html>

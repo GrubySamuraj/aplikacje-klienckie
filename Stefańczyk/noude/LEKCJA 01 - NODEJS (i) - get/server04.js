@@ -4,7 +4,6 @@ var server = http.createServer(function(req,res){
     res.writeHead(200,{"content-type":"text/html;charset=utf-8"})
     let zmienna = req.headers["user-agent"];
     let Wiadomosc = 0
-    // console.log(req.headers["user-agent"]);
     if (zmienna.includes("Firefox")){
         Wiadomosc = "Twoja przeglądarka to Firefox"
     }

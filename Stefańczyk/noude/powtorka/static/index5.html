@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id="file">
+    <input type="text" id="nazwa">
+    <button id="send">send</button>
+    obrazek:
+    <img src="." alt="Tu powienien byc obrazek" id="img">
+    <script>
+        document.getElementById("send").onclick = () => {
+            let fd = new FormData();
+            fd.append("file", document.getElementById("file").files[0]);
+            const body = fd;
+            fetch("/postfile", { method: "post", body })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // document.getElementById("img").setAttribute("src",data);
+                })
+                .catch(error => console.log(error))
+                const options = {
+                    method:"post",
+                    body: document.getElementById("nazwa").value
+                }
+            fetch("/filename", options)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // document.getElementById("img").setAttribute("src",data);
+                })
+                .catch(error => console.log(error));
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #kolor{
+            border: solid black 1px;
+            background-color: white;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    R<input type="range" id="red" min="0" max="255" class="input">
+    G<input type="range" id="green" min="0" max="255" class="input">
+    B<input type="range" id="blue" min="0" max="255" class="input">
+    A<input type="range" id="alpha" min="0" max="100" class="input">
+    <div id="kolor">
+    </div>
+    <script>
+        let cos = document.getElementsByClassName("input")
+            for (let x = 0; x < cos.length; x++) {
+                cos[x].addEventListener("input", main);
+            }
+            function main(){
+                const data = JSON.stringify({
+                    red: document.getElementById("red").value,
+                    green: document.getElementById("green").value,
+                    blue: document.getElementById("blue").value,
+                    alpha: document.getElementById("alpha").value,
+                });
+                console.log(data);
+                const options = {
+                    method: "POST",
+                    body: data
+                };
+                fetch("/data", options)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById("kolor").style.backgroundColor = data;
+                    })
+                    .catch(error => console.log(error));
+            }
+    </script>
+</body>
+
+</html>

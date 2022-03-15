@@ -11,26 +11,39 @@
 </head>
 
 <body>
-    <h1>05 - czytanie plików katalogów</h1>
-    <button id="btn">Przeczytaj</button>
-    <div id="lista"></div>
+    Dane pojazdu:
+    <table>
+        <tr><td>ubezpieczony: </td><td><input type="checkbox" name="ubezpieczony" id="ubezpieczony"></td></tr>
+        <tr><td>benzyna: </td><td><input type="checkbox" name="benzyna" id="benzyna"></td></tr>
+        <tr><td>uszkodzony: </td><td><input type="checkbox" name="uszkodzony" id="uszkodzony"></td></tr>
+        <tr><td>napęd 4x4: </td><td><input type="checkbox" name="naped" id="naped"></td></tr>
+    </table>
+    <button id="btn">Dodaj do bazy</button>
+    Wszystkie pojazdy:
+    <table>
+        <tr><td>ubezpieczony: </td><td><input type="checkbox" name="ubezpieczony" id="ubezpieczony"></td></tr>
+        <tr><td>benzyna: </td><td><input type="checkbox" name="benzyna" id="benzyna"></td></tr>
+        <tr><td>uszkodzony: </td><td><input type="checkbox" name="uszkodzony" id="uszkodzony"></td></tr>
+        <tr><td>napęd 4x4: </td><td><input type="checkbox" name="naped" id="naped"></td></tr>
+    </table>
 
     <script>
         document.getElementById("btn").addEventListener("click", function () {
+            const data = JSON.stringify({
+                ubezpieczony: document.getElementById("ubezpieczony").checked,
+                benzyna: document.getElementById("benzyna").checked,
+                uszkodzony: document.getElementById("uszkodzony").checked,
+                naped: document.getElementById("naped").checked
+            });
+            console.log(data);
             const options = {
-                method: "POST"
+                method: "POST",
+                body: data
             };
             fetch("/files", options)
                 .then(response => response.json())
                 .then(data => {
-                    console.log();
-                    for (let x = 0; x < data.length; x++) {
-                        if (data[x].type) {
-                            document.getElementById("lista").innerHTML += `</br> <span style="color: red; ">` + data[x].file + "/</span>";
-                        } else {
-                            document.getElementById("lista").innerHTML += "</br>" + data[x].file;
-                        }
-                    }
+                    console.log(JSON.stringify(data, null, 5));
                 })
                 .catch(error => console.log(error));
         })
