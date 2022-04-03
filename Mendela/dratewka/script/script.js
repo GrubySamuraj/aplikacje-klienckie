@@ -17,6 +17,7 @@ class Plansza{
         }
     }
     load(){
+        game.voc = false;
         if(!document.getElementById("direction")){
             document.getElementById("directions").innerHTML = "";
             let div1 = document.createElement("div");
@@ -42,16 +43,17 @@ class Plansza{
         this.colhid("EAST");
         this.colhid("SOUTH");
         this.colhid("NORTH");
-        if(this.item[0]){
+        if(this.item[0] || this.special_items[0]){
             document.getElementById("item").innerHTML = "You see "
-            for(let x = 0; x < this.item.length; x++){
-                document.getElementById("item").innerHTML += this.item[x].odmiana + " ";
+            if(this.item[0]){
+                for(let x = 0; x < this.item.length; x++){
+                    document.getElementById("item").innerHTML += this.item[x].odmiana + " ";
+                }
             }
-        }
-        else if(this.special_items[0]){
-            document.getElementById("item").innerHTML = "You see "
-            for(let x = 0; x < this.special_items.length; x++){
-                document.getElementById("item").innerHTML += this.special_items[x].odmiana + " ";
+            if(this.special_items[0]){
+                for(let x = 0; x < this.special_items.length; x++){
+                    document.getElementById("item").innerHTML += this.special_items[x].odmiana + " ";
+                }
             }
         }
         else{
@@ -256,6 +258,8 @@ let game = {
         posx:6,
         posy:3
     },
+    muted:false,
+    voc:false,
     input:document.getElementById("input").value.toLocaleUpperCase(),
     loaddata(){
         //1
@@ -315,12 +319,11 @@ let game = {
         this.czesci_owcy.push(this.items[3],this.items[7],this.items[10],this.items[13],this.items[16],this.items[19]);
     },
     startgame(){
-        // document.addEventListener("load",this.opening());
         this.loaddata();
         this.plansza[this.current_location.posy][this.current_location.posx].load();
         document.addEventListener("click",function(){
             document.getElementById("input").focus();
-        });
+        });1
         document.getElementById("input").addEventListener("input", function(){
             this.value = this.value.toLocaleUpperCase();
             game.input = document.getElementById("input").value;
@@ -329,7 +332,7 @@ let game = {
     },
     listener(){
         document.getElementById("input").onkeydown = (event) => {
-            if(event.keyCode === 13){
+            if(event.keyCode === 13 && this.voc == false){
                 this.move();
             }
             else{
@@ -371,13 +374,17 @@ let game = {
             this.input = cw.join("");
         }
         else if(this.input == "V"){
-            this.input = "VOCABULARY"
+            this.input = "VOCABULARY";
         }
         else if(this.input == "G"){
-            this.input = "GOSSIPS"
+            this.input = "GOSSIPS";
+        }
+        else if(this.input == "M"){
+            this.input = "MUTE";
         }
     },
     informaction(inform){
+        let splitted = inform.split("");
         document.getElementById("input").value = inform;
         document.getElementById("input").disabled = true;
         window.setTimeout(function(){
@@ -434,6 +441,7 @@ let game = {
         else if(this.input.match(new RegExp("(TAKE*.)"))){
             let itemek = this.input.substring(5,this.input.length);
             let indx = 0;
+            let indx_special = 0;
             for(let x = 0;x < this.plansza[this.current_location.posy][this.current_location.posx].item.length;x++){
                 if(game.plansza[this.current_location.posy][this.current_location.posx].item[x].nazwa == itemek){
                     indx = x;
@@ -441,7 +449,7 @@ let game = {
             }
             for(let x = 0;x < this.plansza[this.current_location.posy][this.current_location.posx].special_items.length;x++){
                 if(game.plansza[this.current_location.posy][this.current_location.posx].special_items[x].nazwa == itemek){
-                    indx = x;
+                    indx_special = x;
                 }
             }
             if(!game.plansza[game.current_location.posy][game.current_location.posx].item[0] && !game.plansza[game.current_location.posy][game.current_location.posx].special_items[0]){
@@ -457,7 +465,7 @@ let game = {
             else if(game.player.item.length != 0){
                 this.informaction(`You are carrying something`);
             }
-            else if(this.plansza[this.current_location.posy][this.current_location.posx].special_items[indx].flag == 0){
+            else if(this.plansza[this.current_location.posy][this.current_location.posx].special_items[indx_special].flag == 0){
                 this.informaction(`You can't carry it`);
             }
         }
@@ -487,19 +495,18 @@ let game = {
         else if(this.input.match(new RegExp("(USE*.)"))){
             let lokacja = game.plansza[this.current_location.posy][this.current_location.posx];
             let itemek = this.input.substring(4,this.input.length);
-            let indx = 0;
+            let indx = -1;
             if(lokacja.usableitem){
                 for(let x = 0;x < lokacja.usableitem.length;x++){
                     if(lokacja.usableitem[x].nazwa == itemek){
                         indx = x;
                     }
                 }
-                console.log(indx);
             }
             if(game.player.item == game.items[26]){
                 game.ending();
             }
-            if(!lokacja.usableitem){
+            if(!lokacja.usableitem || indx == -1){
                 this.informaction("Nothing happened");
             }
             else if(lokacja.usableitem[indx].nazwa == itemek && !lokacja.usableitem.includes(game.player.item)){
@@ -568,7 +575,7 @@ let game = {
                         document.getElementById("input").value = "The dragon ate your sheep and died!";
                         lokacja.img = `./content/img/smok.bmp`
                         game.player.item = "";
-                        lokacja.item = game.items[20];
+                        lokacja.special_items = game.items[20];
                         lokacja.load();
                         window.setTimeout(()=>{
                             document.getElementById("input").value = "";
@@ -595,17 +602,20 @@ let game = {
             }
             lokacja.load();
         }
-        else if(this.input== "VOCABULARY"){
+        else if(this.input == "VOCABULARY"){
+            this.voc = true;
             document.getElementById("input").value = "";
-            document.getElementById("directions").innerHTML = "NORTH or N, SOUTH or S <br>"+
-            "WEST or W, EAST or E <br>"+
-            "TAKE (object) or T (object) <br>"+
-            "DROP (object) or D (object) <br>"+
-            "USE (object) or U (object) <br>"+
-            "GOSSIPS or G, VOCABULARY or V <br>"+
+            document.getElementById("directions").innerHTML = "NORTH or N, SOUTH or S <br>" +
+            "WEST or W, EAST or E <br>" +
+            "TAKE (object) or T (object) <br>" +
+            "DROP (object) or D (object) <br>" +
+            "USE (object) or U (object) <br>" +
+            "GOSSIPS or G, VOCABULARY or V <br>" +
+            "MUTE," +
+            "UNMUTE <br>" +
             "Press any key to continue";
         }
-        else if(this.input== "GOSSIPS"){
+        else if(this.input == "GOSSIPS"){
             document.getElementById("input").value = "";
             document.getElementById("directions").innerHTML = "The  woodcutter lost  his home key..."+
             "The butcher likes fruit... The cooper"+
@@ -615,25 +625,33 @@ let game = {
             "pickers... Making a rag from a bag..."+
             "Press any key";
         }
+        else if(this.input == "MUTE"){
+            this.mute();
+        }
+        else if(this.input == "UNMUTE"){
+            this.unmute();
+        }
         else{
             this.informaction("Please input suitable value, type V or VOCABULARY for help");
         }
     },
     ending(){
-        let vid = document.createElement("video");
+        let vid = document.createAttribute("video");
         vid.setAttribute("src","./content/img/expects_unexpected.mp4");
         vid.setAttribute("autoplay",true);
         vid.setAttribute("id","video");
         document.getElementById("screen").appendChild(vid);
-        console.log("endgame");
     },
     opening(){
+        let aud = document.getElementById("hejnal");
+        aud.volume = 0.15;
+        aud.currentTime = 60;
         let opening = document.getElementById("opening");
         let black = document.getElementById("black");
         let cos = 0;
         document.addEventListener("keyup",function(){
             if(cos == 0){
-                opening.setAttribute("src","./content/img/czołówka.jpg");
+                opening.setAttribute("src","./content/img/czolowka.jpg");
                 opening.setAttribute("animation-name","example");
             }
             if(cos == 1){
@@ -651,10 +669,23 @@ let game = {
             else if(cos == 3){
                 opening.style.animationName = "";
                 opening.style.visibility = "hidden";
+                document.getElementById("hejnal").setAttribute("src","./content/mp3/theme.mp3")
                 game.startgame();
+                document.getElementById("input").value = "";
             }
             cos++;
         });
+    },
+    mute(){
+        let aud = document.getElementById("hejnal");
+        aud.volume = 0;
+        this.informaction("Muting... ;<");
+    },
+    unmute(){
+        let aud = document.getElementById("hejnal");
+        aud.volume = 0.15;
+        aud.currentTime = 0;
+        this.informaction("You can now hear fantastic music! :>");
     }
 }
 

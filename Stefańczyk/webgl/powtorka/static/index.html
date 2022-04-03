@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/three.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="cube">cube</button>
+    <button id="walec">walec</button>
+    <button id="stozek">stozek</button>
+    <button id="kula">kula</button>
+    <div id="root"></div>
+    <script>
+
+        const scene = new THREE.Scene();
+        const geometry = new THREE.BoxGeometry(50, 50, 50);
+        const geometry2 = new THREE.CylinderGeometry( 50, 50, 50, 32 );
+        const geometry3 = new THREE.CylinderGeometry( 0, 50, 50, 32 );
+        const geometry4 = new THREE.SphereGeometry( 15, 32, 16 );
+        const material = new THREE.MeshBasicMaterial({
+                color: 0x8888ff,
+                side: THREE.DoubleSide,
+                wireframe: false,
+            });
+            const material2 = new THREE.MeshBasicMaterial({
+                color: 0xabcabc,
+                side: THREE.DoubleSide,
+                wireframe: false,
+            });
+            const material3 = new THREE.MeshBasicMaterial({
+                color: 0xcbacba,
+                side: THREE.DoubleSide,
+                wireframe: false,
+            });
+            const material4 = new THREE.MeshBasicMaterial({
+                color: 0xeeff00,
+                side: THREE.DoubleSide,
+                wireframe: false,
+            });
+        const cube = new THREE.Mesh(geometry, material);
+        const cylinder = new THREE.Mesh(geometry2,material2);
+        const stozek = new THREE.Mesh(geometry3,material3);
+        const kula = new THREE.Mesh(geometry4,material4);
+        scene.add(cube);
+        scene.add(cylinder);
+        scene.add(stozek);
+        scene.add(kula);
+        const camera = new THREE.PerspectiveCamera(
+            45,    // kąt patrzenia kamery (FOV - field of view)
+            window.innerWidth/ window.innerHeight,  // proporcje widoku, powinny odpowiadać proporcjom naszego ekranu przeglądarki
+            0.1,    // minimalna renderowana odległość
+            10000    // maksymalna renderowana odległość od kamery
+        );
+
+        const renderer = new THREE.WebGLRenderer();
+
+        renderer.setClearColor(0xffffff);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        $("#root").append(renderer.domElement);
+        const axes = new THREE.AxesHelper(1000);
+        scene.add(axes);
+        camera.position.set(100, 100, 100);
+        camera.lookAt(scene.position);
+            let x = 0;
+            let y = 0;
+            let z = 0;
+            let b = 0;
+            $("#walec").on("click",function(){
+                x++;
+                if(x % 2 == 0){
+                    scene.add(cylinder);
+                }
+                else{
+                    scene.remove(cylinder);
+                }
+            });
+            $("#cube").on("click",function(){
+                y++;
+                if(y % 2 == 0){
+                    scene.add(cube);
+                }
+                else{
+                    scene.remove(cube);
+                }
+            });
+            $("#stozek").on("click",function(){
+                z++;
+                if(z % 2 == 0){
+                    scene.add(stozek);
+                }
+                else{
+                    scene.remove(stozek);
+                }
+            });
+            $("#kula").on("click",function(){
+                b++;
+                if(b % 2 == 0){
+                    scene.add(kula);
+                }
+                else{
+                    scene.remove(kula);
+                }
+            });
+        function render() {
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+            cube.rotation.y += 0.01;
+        }
+        render();
+    </script>
+</body>
+
+</html>

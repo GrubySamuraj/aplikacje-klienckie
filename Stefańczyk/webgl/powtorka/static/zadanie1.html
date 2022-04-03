@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/three.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        // scena 3D
+
+        const scene = new THREE.Scene();
+
+        //kamera perspektywiczna - przeczytaj dokładnie objaśnienia w komentarzach
+
+        const camera = new THREE.PerspectiveCamera(
+            45,    // kąt patrzenia kamery (FOV - field of view)
+            4 / 3,    // proporcje widoku, powinny odpowiadać proporcjom naszego ekranu przeglądarki
+            0.1,    // minimalna renderowana odległość
+            10000    // maksymalna renderowana odległość od kamery
+        );
+
+        const renderer = new THREE.WebGLRenderer();
+
+        // kolor tła sceny - uwaga na prefix 0x a nie #
+
+        renderer.setClearColor(0xffffff);
+
+        // ustal rozmiary renderowanego okna w px (szer, wys)
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+
+        // dodanie renderera do diva, który istnieje na scenie
+
+        $("#root").append(renderer.domElement);
+
+        const axes = new THREE.AxesHelper(1000);
+        scene.add(axes);
+
+        camera.position.set(100, 100, 100);
+
+        // nakierowanie kamery na punkt (0,0,0) w przestrzeni (zakładamy, że istnieje już scena)
+
+        camera.lookAt(scene.position);
+
+        // kluczowy element - animacja
+
+        function render() {
+            //w tym miejscu ustalamy wszelkie zmiany w projekcie (obrót, skalę, położenie obiektów)
+            //np zmieniająca się wartość rotacji obiektu
+
+            //mesh.rotation.y += 0.01;
+
+            //wykonywanie funkcji bez końca, ok 60 fps jeśli pozwala na to wydajność maszyny
+
+            requestAnimationFrame(render);
+
+            // potwierdzenie w konsoli, że render się wykonuje
+
+            console.log("render leci")
+
+            //ciągłe renderowanie / wyświetlanie widoku sceny naszą kamerą
+
+            renderer.render(scene, camera);
+        }
+
+        // na koniec jednokrotne wykonanie powyższej funkcji
+
+        render();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/three.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="range" id="scale" min="0" max="1" step="0.01">
+    <div id="root"></div>
+    <script>
+        let color = THREE.MathUtils.randInt(0, 0xffffff);
+        const geometry = new THREE.BoxGeometry(50, 50, 50);
+            const material = new THREE.MeshBasicMaterial({
+                color: color,
+                side: THREE.DoubleSide,
+                wireframe: false,
+            });
+        const scene = new THREE.Scene();
+        let posx = -130;
+        let posy = 0;
+        let posz = -130;
+        for(let x = 0; x < 5; x++){
+            posy = 0;
+            for(let y = 0; y < 5; y++){
+                posz = -130;
+                for(let z = 0; z < 5; z++){
+                    createcube(posx,posy,posz,color);
+                    posz+=55
+                }
+                posy+=55
+            }
+            posx+=55;
+        }
+        function createcube(posx,posy,posz,color){
+            const cube = new THREE.Mesh(geometry, material);
+            cube.position.set(posx,posy,posz);
+            scene.add(cube);
+            $("#scale").on("input",function(){
+                console.log("cos");
+                cube.scale.x = $("#scale").val();
+                cube.scale.y = $("#scale").val();
+                cube.scale.z = $("#scale").val();
+            })
+        }
+        console.log(scene.children);
+        const camera = new THREE.PerspectiveCamera(
+            45,    // kąt patrzenia kamery (FOV - field of view)
+            window.innerWidth/ window.innerHeight,  // proporcje widoku, powinny odpowiadać proporcjom naszego ekranu przeglądarki
+            0.1,    // minimalna renderowana odległość
+            10000    // maksymalna renderowana odległość od kamery
+        );
+
+        const renderer = new THREE.WebGLRenderer();
+
+        renderer.setClearColor(0xffffff);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        $("#root").append(renderer.domElement);
+        const axes = new THREE.AxesHelper(1000);
+        scene.add(axes);
+        camera.position.set(500, 500, 500);
+        camera.lookAt(scene.position);
+        function render() {
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
+        render();
+    </script>
+</body>
+
+</html>

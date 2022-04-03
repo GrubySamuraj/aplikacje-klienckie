@@ -10,21 +10,13 @@
 <body>
     <div id="cos"></div>
     <button id="btn"></button>
+    <audio autoplay id="myVideo">
+        <source src="./content/mp3/hejnal.mp3" type="audio/mpeg">
+    </audio>
     <script>
-        a = "asdasdas(timeout)dsadas(timeout)dsdas";
-        if(a.match(new RegExp(".*timeout.*"))){
-            let cos = a.split("(timeout)");
-            console.log(cos[0]);
-            window.setTimeout(function(){
-                console.log(cos[1]);
-                window.setTimeout(function(){
-                    console.log(cos[2]);
-                    window.setTimeout(function(){
-                        console.log(cos);
-                    },2000);
-                },2000);
-            },2000);
-        }
+        let vid = document.getElementById("myVideo");
+        vid.volume = 0.15; 
+        vid.currentTime = 60;
     </script>
 </body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/three.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(
+            45,    // kąt patrzenia kamery (FOV - field of view)
+            window.innerWidth/ window.innerHeight,  // proporcje widoku, powinny odpowiadać proporcjom naszego ekranu przeglądarki
+            0.1,    // minimalna renderowana odległość
+            10000    // maksymalna renderowana odległość od kamery
+        );
+        let rot1 = false
+        const renderer = new THREE.WebGLRenderer();
+        const geometry = new THREE.BoxGeometry(50, 50, 50);
+        const material = new THREE.MeshBasicMaterial({
+            color: 0x123aaa,
+            side: THREE.DoubleSide,
+            wireframe: false,
+        });
+        const cube = new THREE.Mesh(geometry, material);
+        scene.add(cube);
+        renderer.setClearColor(0xffffff);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        $("#root").append(renderer.domElement);
+        const axes = new THREE.AxesHelper(1000);
+        scene.add(axes);
+        camera.position.set(100, 100, 100);
+        const raycaster = new THREE.Raycaster();
+        const mouseVector = new THREE.Vector2();
+        $(document).mousedown(function (event) {
+            mouseVector.x = (event.clientX / $(window).width()) * 2 - 1;
+            mouseVector.y = -(event.clientY / $(window).height()) * 2 + 1;
+            raycaster.setFromCamera(mouseVector, camera);
+            const intersects = raycaster.intersectObjects(scene.children);
+            if (intersects.length > 0) {
+                if(rot1 == false){
+                    rot1 = true;
+                }
+                else{
+                    rot1 = false;
+                }
+            }
+        })
+        camera.lookAt(scene.position);
+        function render() {
+            if(rot1 == true){
+                cube.rotation.y +=0.01;
+            }
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+        }
+        render();
+    </script>
+</body>
+
+</html>
