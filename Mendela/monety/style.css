@@ -1,59 +1,24 @@
-#plansza {
-  background-color: #dddddd;
-  position: relative;
+th {
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    font-size: 25px;
 }
-.pole {
-  width: 50px;
-  height: 50px;
-  border: 1px solid black;
-  position: absolute;
-  background-color: #000;
+td {
+    border: 1px solid black;
+    font-size: 25px;
 }
-.granica {
-  background-image: url("img/sciana.png");
+table{
+    text-align: center;
 }
-.snakeheadleft {
-  background-image: url("img/snakeheadleft.png");
+input{
+    width: 90%;
+    margin: 8px 0;
+    box-sizing: border-box;
 }
-.snakeheadtop {
-  background-image: url("img/snakeheadtop.png");
-}
-.snakeheaddown {
-  background-image: url("img/snakeheaddown.png");
-}
-.snakeheadright {
-  background-image: url("img/snakeheadright.png");
-}
-.jablko{
-  background-image: url("img/Apple.png");
-}
-.snakebody{
-  background-image: url("img/snake.png");
-}
-.snakehorizontal {
-  background-image: url("img/snakehorizontal.png");
-}
-.ogondol{
-  background-image: url("img/ogon_dol.png");
-}
-.ogongora{
-  background-image: url("img/ogon_top.png");
-}
-.ogonright{
-  background-image: url("img/ogon_right.png");
-}
-.ogonleft{
-  background-image: url("img/ogon_left.png");
-}
-.snake_bot_left{
-  background-image: url("img/snake_bot_left.png");
-}
-.snake_bot_right{
-  background-image: url("img/snake_bot_right.png");
-}
-.snake_top_right{
-  background-image: url("img/snake_top_right.png");
-}
-.snake_top_left{
-  background-image: url("img/snake_top_left.png");
+select{
+    width: 90%;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-size: 15px;
 }

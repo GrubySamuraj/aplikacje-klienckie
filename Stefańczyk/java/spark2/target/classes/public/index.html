@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>zadanie1</title>
+    <style>
+        #main{
+            background-color:#ccc;
+            padding:20px;
+        }
+        input,select{
+            margin:5px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Spark server, post, fetch</h3>
+    <div id="main">
+        model: <input id="name"></br>
+        rok: <select id="rok">
+                <option value="1990">1990</option>
+                <option value="1991">1991</option>
+                <option value="1992">1992</option>
+                <option value="1993">1993</option>
+                <option value="1994">1994</option>
+                <option value="1995">1995</option>
+                <option value="1996">1996</option>
+                <option value="1997">1997</option>
+                <option value="1998">1998</option>
+                <option value="1999">1999</option>
+                <option value="2000">2000</option>
+                <option value="2001">2001</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
+                <option value="2005">2005</option>
+                <option value="2006">2006</option>
+            </select>
+        poduszki powietrzne: kierowca|pasażer|tylna kanapa|boczne z tyłu
+        <input type="checkbox" id="kierowca" class="airbags">
+        <input type="checkbox" id="pasazer" class="airbags">
+        <input type="checkbox" id="tylna" class="airbags">
+        <input type="checkbox" id="boczne" class="airbags"></br>
+        kolor: <input type="color" id="color">
+    </div>
+    </br>
+    <button id="add">Dodaj</button>
+    </br>
+    <a href="/admin.html">Strona z danymi</a>
+    <script>
+        document.getElementById("add").addEventListener("click",function (){
+            let airbags = [];
+            let elements = document.getElementsByClassName("airbags");
+
+           const data = JSON.stringify({
+               model:document.getElementById("name").value,
+                airbags:[
+                   {des:"kierowca", value: document.getElementById("kierowca").checked},
+                   {des:"pasazer", value: document.getElementById("pasazer").checked},
+                   {des:"tylna", value: document.getElementById("tylna").checked},
+                   {des:"boczne", value: document.getElementById("boczne").checked}
+                ],
+               year:document.getElementById("rok").value,
+               color:document.getElementById("color").value,
+           });
+           console.log(data);
+           const options = {
+               method: "POST",
+               body:data
+           };
+            fetch("/add", options)
+                .then(response => response.json()) // konwersja na json
+                .then(data =>{
+                    console.log(data);
+                    let body = JSON.stringify(data, null, 5);
+                    alert(body);
+                })
+                    .catch(error => console.log(error));
+        });
+    </script>
+
+</body>
+</html>
