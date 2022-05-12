@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+</head>
+<body>
+    <h1>admin page</h1>
+    <button id="baza">Generuj bazę samochodów</button>
+    <a href="index.html">index</a>
+    <a href="edit_update.html" methods="POST" id="delete_update">delete/update cars</a>
+    <a href="search.html">search invoices</a>
+    <table id="tab">
+
+    </table>
+    <script>
+        document.getElementById("baza").onclick = async () => {
+            let json = await fetchPostAsync();
+            console.log(json);
+            let keys = ["id","uuid","model","year","airbags","color"];
+            cols = 8;
+            let tr = document.createElement("tr");
+            let table = document.getElementById("tab");
+            table.innerHTML = "";
+            for (let x = 0; x < cols; x++){
+                let th = document.createElement("th");
+                if(x==0){
+                    th.innerText = "lp";
+                }
+                else if(x == 1){
+                    th.innerText = "UUID";
+                }
+                else if(x == 2){
+                    th.innerText = "Marka samochodu";
+                }
+                else if(x == 3){
+                    th.innerText = "Rok";
+                }
+                else if(x == 4){
+                    th.innerText = "Poduszki powietrzne";
+                }
+                else if(x == 5){
+                    th.innerText = "Kolor";
+                }
+                tr.appendChild(th);
+            }
+            table.appendChild(tr);
+            for (let x = 0; x < json.length; x++){
+                let tr1 = document.createElement("tr");
+                tr1.setAttribute("id","tr" + x);
+                let td = document.createElement("td");
+                td.setAttribute("id","td"+x + "_0");
+                td.innerText = json[x].id;
+                tr1.appendChild(td);
+                td = document.createElement("td");
+                td.setAttribute("id","td"+x + "_1");
+                td.innerText = json[x].uuid;
+                tr1.appendChild(td);
+                td = document.createElement("td");
+                td.setAttribute("id","td"+x + "_2");
+                td.innerText = json[x].model;
+                tr1.appendChild(td);
+                td = document.createElement("td");
+                td.setAttribute("id","td"+x + "_3");
+                td.innerText = json[x].year;
+                tr1.appendChild(td);
+                td = document.createElement("td");
+                td.setAttribute("id","td"+x + "_4");
+                for(let y = 0;y < json[x].airbags.length; y++) {
+                    td.innerHTML += json[x].airbags[y].des + " : "+ json[x].airbags[y].value + "</br>";
+                }
+                tr1.appendChild(td);
+                td = document.createElement("td");
+                td.setAttribute("id","td"+x + "_5");
+                td.style.backgroundColor = json[x].color;
+                tr1.appendChild(td);
+                td = document.createElement("td");
+                td.setAttribute("id","td"+x + "_6");
+                let btn = document.createElement("button");
+                btn.setAttribute("id","btn" + json[x].id);
+
+                btn.addEventListener("click",function (){
+                    let id = this.id.substring(3,this.id.length)
+                    console.log(id);
+                    const options = {
+                        method: "POST",
+                        body: parseInt(id) - 1
+                    };
+                    fetch("/pdf", options)
+                        .then(response => response.text())
+                        .then(data => {
+                            console.log(data);
+                            let row = this.parentElement.id.slice(2).split("_")[0]
+                            console.log(row);
+                            let a = document.createElement("a");
+                            data = data.split("/");
+                            a.setAttribute("href","/invoices?name=" + data[2]);
+                            a.setAttribute("id","a"+row);
+                            a.innerText = "Pobierz PDFa";
+                            // a.onclick = function (){
+                            //     const options = {
+                            //         method: "GET",
+                            //         body: data
+                            //     };
+                            //     fetch("/invoices", options)
+                            //         .then(response => response.text())
+                            //         .then(data => {
+                            //             console.log(data)
+                            //         })
+                            //         .catch(error => console.log(error));
+                            // }
+                            document.getElementById("td"+ row + "_7").appendChild(a);
+                        })
+                            .catch(error => console.log(error));
+                });
+                btn.innerText = "Generuj PDF";
+                td.appendChild(btn);
+                tr1.appendChild(td);
+                td = document.createElement("td");
+                td.setAttribute("id","td"+x + "_7");
+                tr1.appendChild(td);
+                table.appendChild(tr1);
+            }
+        }
+        fetchPostAsync = async () => {
+            const options = {
+                method: "POST",
+            };
+
+            let response = await fetch("/json", options)
+
+            if (!response.ok)
+                return response.status
+            else
+                return await response.json() // response.json
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+* {
+    box-sizing: border-box;
+}
+
+#komunikator {
+    width: 100%;
+    height: 600px;
+}
+
+#visual {
+    height: 300px;
+    table-layout: fixed;
+    width: 100%;
+    max-width: 100%;
+    border: 1px solid black;
+    border-radius: 3px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+#wiadomosc {
+    margin-top: 2px;
+    width: 100%;
+    height: 30px;
+    margin-bottom: 2px;
+    position: absolute;
+}
+
+.time,
+.nick,
+.message {
+    display: block;
+    float: left;
+    overflow: hidden;
+}
+
+.container {
+    padding: 0px;
+    clear: both;
+    height: 18px;
+}
+
+#scrollbar1 #komunikator {
+    list-style: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    padding: 0;
+    margin: 0;
+}
+
+#scrollbar1 .scrollbar {
+    position: relative;
+    background: transparent url(scrollbar/images/bg-scrollbar-track-y.png) no-repeat 0 0;
+    float: right;
+    width: 15px;
+}
+
+#scrollbar1 .track {
+    background: transparent url(scrollbar/images/bg-scrollbar-trackend-y.png) no-repeat 0 100%;
+    height: 400px;
+    width: 13px;
+    position: relative;
+    padding: 0 1px;
+}
+
+#scrollbar1 .thumb {
+    background: transparent url(scrollbar/images/bg-scrollbar-thumb-y.png) no-repeat 50% 100%;
+    height: 20px;
+    width: 25px;
+    cursor: pointer;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: -5px;
+}
+
+#scrollbar1 .thumb .end {
+    background: transparent url(scrollbar/images/bg-scrollbar-thumb-y.png) no-repeat 50% 0;
+    overflow: hidden;
+    height: 5px;
+    width: 25px;
+}
+
+#scrollbar1 .disable {
+    display: none;
+}

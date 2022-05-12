@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        td{
+            border: black 1px solid;
+            min-width: 100px;
+            min-height: 100px;
+        }
+        #edit {
+            width: 300px;
+            height: 400px;
+            padding: 50px;
+            position: absolute;
+            top: 10%;
+            right: 50%;
+            transform: translate(50%);
+            background-color: #aaa;
+            border-radius: 10px;
+            opacity: 70%;
+            z-index: 3;
+        }
+        #edit2{
+            position:absolute;
+            top: 0px;
+            right: 0px;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            opacity:80%;
+            z-index: 2;
+        }
+        #editButton{
+            position:absolute;
+            bottom:100px;
+            left:50px;
+            width:100px;
+        }
+        #cancelbutton{
+            position:absolute;
+            bottom:100px;
+            right:50px;
+            width:100px;
+        }
+        select{
+            margin-top:20px;
+            width:200px;
+        }
+        input{
+            width: 200px;
+        }
+    </style>
+</head>
+<body onload="load()">
+    <h1>All cars</h1>
+    <a href="index.html">strona index</a>
+    <a href="admin.html">admin</a>
+    <a href="search.html">search invoices</a>
+    <table id="tab"></table>
+    <script>
+        let json
+        let id
+        load = async() => {
+            json = await fetchPostAsync();
+            console.log(json);
+            let table = document.getElementById("tab");
+            table.innerHTML = "";
+            for(let x = 0; x < json.length; x++){
+                let tr = document.createElement("tr");
+                for (let y = 0; y < 8; y++) {
+                    let td = document.createElement("td");
+                    if(y === 0){
+                        td.innerText = json[x].id
+                    }
+                    else if(y === 1){
+                        td.innerText = json[x].uuid
+                    }
+                    else if(y === 2){
+                        td.innerText = json[x].model
+                    }
+                    else if(y === 3){
+                        td.innerText = json[x].year
+                    }
+                    else if(y === 4){
+                        for(let z = 0; z < json[x].airbags.length; z++){
+                            td.innerHTML += json[x].airbags[z].des + " : ";
+                            td.innerHTML += json[x].airbags[z].value;
+                            td.innerHTML += "</br>";
+                        }
+                    }
+                    else if(y === 5){
+                        td.style.backgroundColor = json[x].color;
+                    }
+                    else if(y === 6){
+                        let btn = document.createElement("button");
+                        btn.setAttribute("id","delete" + x);
+                        btn.innerText = "delete car";
+                        btn.classList.add("delete");
+                        btn.onclick = deleteCar;
+                        td.appendChild(btn);
+                    }
+                    else if(y === 7){
+                        let btn = document.createElement("button");
+                        btn.setAttribute("id","update" + x);
+                        btn.innerText = "update car";
+                        btn.classList.add("update");
+                        btn.onclick = updateCar;
+                        td.appendChild(btn);
+                    }
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+        }
+        fetchPostAsync = async () => {
+            const options = {
+                method: "POST",
+            };
+
+            let response = await fetch("/getTable", options)
+
+            if (!response.ok)
+                return response.status
+            else
+                return await response.json() // response.json
+        }
+        function deleteCar(){
+            id = this.id.slice(6);
+            const options = {
+                method: "POST",
+                body:id
+            }
+            fetch("/delete", options)
+                .then(response => response.text())
+                .then(data => {
+                    load();
+                })
+                .catch(error => console.log(error));
+        }
+        function updateCar(){
+            id = this.id.slice(6);
+            if(!document.getElementById("edit")) {
+                let btn1 = document.createElement("button");
+                let btn2 = document.createElement("button");
+                let input = document.createElement("input");
+                let select = document.createElement("select");
+                let div = document.createElement("div");
+                let div2 = document.createElement("div");
+                div.setAttribute("id", "edit");
+                div2.setAttribute("id", "edit2");
+                btn1.setAttribute("id", "editButton");
+                btn2.setAttribute("id", "cancelbutton");
+                select.setAttribute("id","select")
+                input.setAttribute("id","input");
+                btn1.innerText = "Update";
+                btn2.innerText = "Cancel";
+                btn1.onclick = updateCarNet;
+                btn2.onclick = cancel;
+                input.value = json[id].model;
+                let year = 1990;
+                for(let x = 0; x < 20; x++){
+                    let option = document.createElement("option");
+                    if(year == json[id].year){
+                        option.setAttribute("selected",true);
+                    }
+                    option.innerText = year;
+                    select.appendChild(option)
+                    year++;
+                }
+                let body = document.body;
+                div.appendChild(input);
+                div.appendChild(select);
+                div.appendChild(btn1);
+                div.appendChild(btn2);
+                body.appendChild(div);
+                body.appendChild(div2);
+            }
+        }
+        function updateCarNet(){
+            let data_fetch = {
+                id:id,
+                year:document.getElementById("select").value,
+                model:document.getElementById("input").value
+            }
+            const options = {
+                method:"POST",
+                body:JSON.stringify(data_fetch,null,5)
+            }
+            fetch("/update", options)
+                .then(response => response.text())
+                .then(data => {
+                    load();
+                    cancel();
+                })
+                .catch(error => console.log(error));
+        }
+        function cancel(){
+            document.getElementById("edit").remove();
+            document.getElementById("edit2").remove();
+        }
+    </script>
+</body>
+</html>
