@@ -112,6 +112,7 @@ class Game {
         this.intersects = this.raycaster.intersectObjects(this.scene.children);
         if (this.intersects.length > 0) {
             let obj = this.intersects[0].object
+            console.log(obj);
             if (obj.name == "pion") {
                 if (this.poprzedni_pion && this.poprzedni_pion.name == "pion" && obj.typ == ui.logged_user) {
                     if (obj.typ == 1) {
