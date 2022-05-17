@@ -45,7 +45,9 @@ class Main {
         this.style.borderColor = "white";
     }
     click() {
+        let cl = document.getElementById("clicked");
         let id = this.id.slice(3);
+        cl.innerHTML = id;
         main.clickedBlock = main.kloce[id];
         console.log(main.clickedBlock);
     }

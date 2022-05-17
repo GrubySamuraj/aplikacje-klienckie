@@ -37,15 +37,26 @@
             float: left;
             padding: 2px;
             padding-bottom: 0px;
+            z-index: 2;
         }
         #plansza{
             position:absolute;
             cursor:pointer;
             left:500px;
         }
+        #clicked{
+            display: none;
+        }
+        #planszaCanvas{
+            position:absolute;
+            top:0;
+            right:0;
+            z-index: 0;
+        }
     </style>
 </head>
 <body>
+    <div id="clicked"></div>
     <img src="./img/arkanoid.png" alt="ddd" id="mapa">
     <div id="bloczki">
     </div>
