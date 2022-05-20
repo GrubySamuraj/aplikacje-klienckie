@@ -1,60 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script type="module" src="./js/script.js" defer></script>
+    <script type="module" src="./js/main.js" defer></script>
     <style>
-        body{
+        body {
             background-color: black;
         }
-        #bloczki{
+
+        #bloczki {
             width: 280px;
-            position:absolute;
-            cursor:pointer;
+            position: absolute;
+            cursor: pointer;
         }
-        #mapa{
+
+        #mapa {
             display: none;
         }
-        .blockContainer{
+
+        .blockContainer {
             opacity: 0.5;
-            border:1px white dotted;
+            border: 1px white dotted;
             width: 50px;
             height: 25px;
-            position:relative;
+            position: relative;
             float: left;
             padding: 2px;
             padding-bottom: 0px;
         }
-        .blockContainerPlansza{
+
+        .blockContainerPlansza {
             opacity: 1;
-            border:1px white dotted;
+            border: 1px white dotted;
             width: 50px;
             height: 25px;
-            position:relative;
+            position: relative;
             float: left;
             padding: 2px;
             padding-bottom: 0px;
             z-index: 2;
         }
-        #plansza{
-            position:absolute;
-            cursor:pointer;
-            left:500px;
+
+        #plansza {
+            position: absolute;
+            cursor: pointer;
+            left: 500px;
         }
-        #clicked{
+
+        #clicked {
             display: none;
         }
-        #planszaCanvas{
-            position:absolute;
-            top:0;
-            right:0;
+
+        #planszaCanvas {
+            position: absolute;
+            top: 0;
+            right: 0;
             z-index: 0;
+        }
+
+        #zaznaczenie {
+            background-color: yellow;
+            position: absolute;
         }
     </style>
 </head>
+
 <body>
     <div id="clicked"></div>
     <img src="./img/arkanoid.png" alt="ddd" id="mapa">
@@ -62,4 +76,5 @@
     </div>
     <div id="plansza"></div>
 </body>
+
 </html>

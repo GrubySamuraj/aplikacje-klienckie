@@ -1,11 +1,12 @@
+"use strict";
 import { Kloc } from "./kloc.js";
 import { Plansza } from "./plansza.js";
+import { main } from "./main.js";
+import { plansza } from "./main.js";
 class Main {
     constructor() {
         this.kloce = [];
         this.createKloce();
-        this.plansza = new Plansza();
-        this.plansza.createPlansza();
         this.clickedBlock = "";
     }
     createKloce = () => {
@@ -45,11 +46,17 @@ class Main {
         this.style.borderColor = "white";
     }
     click() {
-        let cl = document.getElementById("clicked");
-        let id = this.id.slice(3);
-        cl.innerHTML = id;
-        main.clickedBlock = main.kloce[id];
-        console.log(main.clickedBlock);
+        let canvas = document.getElementById("planszaCanvas");
+        console.log(plansza.clickedDivs);
+        for (const clickedDiv of plansza.clickedDivs) {
+            let klocek = this.children[0];
+            let ctx = canvas.getContext("2d");
+            let posx = parseInt(clickedDiv.getAttribute("posx")) + 2;
+            let posy = parseInt(clickedDiv.getAttribute("posy")) + 2;
+            plansza.unfocus2(clickedDiv);
+            ctx.drawImage(klocek, posx, posy);
+        }
+        plansza.clickedDivs = [];
     }
 }
-let main = new Main();
+export { Main };

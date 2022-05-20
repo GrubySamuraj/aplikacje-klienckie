@@ -1,3 +1,4 @@
+"use strict";
 class Kloc {
     constructor(sx, sy) {
         this.mapa = document.getElementById("mapa");
