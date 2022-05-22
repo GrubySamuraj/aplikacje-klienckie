@@ -10,6 +10,8 @@ class Plansza {
         this.clickedDivs = [];
         this.actualClickedDivs = [];
         this.plansz.addEventListener("mousedown", this.createKwadrat);
+        document.addEventListener("contextmenu", this.rclick);
+        this.cos;
     }
     createPlansza = () => {
         let posx = 0;
@@ -46,6 +48,7 @@ class Plansza {
     clicked() {
         if (!plansza.clickedDivs.includes(this)) {
             plansza.clickedDivs.push(this);
+            this.removeEventListener("mouseleave", plansza.unfocus);
         }
     }
     focus() {
@@ -55,6 +58,7 @@ class Plansza {
     focus2(el) {
         el.style.opacity = 0.5;
         el.style.borderColor = "red";
+        el.removeEventListener("mouseleave", plansza.unfocus);
     }
     unfocus() {
         this.style.opacity = 1;
@@ -68,8 +72,8 @@ class Plansza {
         document.addEventListener("mouseup", plansza.removeKwadrat);
         let div = document.createElement("div");
         div.setAttribute("id", "zaznaczenie");
-        plansza.fX = e.clientX; // git
-        plansza.fY = e.clientY; // git
+        plansza.fX = e.clientX;
+        plansza.fY = e.clientY;
         div.style.top = e.clientY + "px";
         div.style.left = e.clientX + "px";
         let body = document.body;
@@ -86,6 +90,7 @@ class Plansza {
         }
     }
     poruszanie(event) {
+        plansza.clickedDivs = [];
         let div = document.getElementById("zaznaczenie");
         let overlap = div.getBoundingClientRect();
         let x = overlap.x;
@@ -97,12 +102,10 @@ class Plansza {
         let id = (pY * plansza.width) + pX;
         let ileWidth = Math.ceil(overlap.width / 56);
         let ileHeight = Math.ceil(overlap.height / 29);
-        // let cos = plansza.clickedDivs;
-        // let difference = plansza.clickedDivs.filter(x => cos.indexOf(x) === -1);
-        // console.log(difference);
+        let difference = plansza.clickedDivs.filter(x => plansza.cos.indexOf(x) === -1);
+        console.log(difference);
         plansza.clickedDivs = [];
         if (plansza.fX < event.clientX && plansza.fY < event.clientY) {
-            console.log(overlap);
             for (let y = 0; y < ileHeight; y++) {
                 for (let x = 0; x < ileWidth; x++) {
                     let selectedDiv = document.getElementById(`blokPlanszy${(id + x) + (y * plansza.width)}`);
@@ -116,15 +119,46 @@ class Plansza {
         else if (plansza.fX < event.clientX && plansza.fY > event.clientY) {
             for (let y = 0; y < ileHeight; y++) {
                 for (let x = 0; x < ileWidth; x++) {
-                    let selectedDiv = document.getElementById(`blokPlanszy${(id + x) - (y * plansza.width)}`);
+                    let selectedDiv = document.getElementById(`blokPlanszy${(id + x) + (y * plansza.width)}`);
                     plansza.focus2(selectedDiv);
                     plansza.clickedDivs.push(selectedDiv);
                 }
             }
-            //tu trzeba pokombinować
+            div.style.top = event.clientY + "px";
+            div.style.left = plansza.pX + "px";
             div.style.width = event.clientX - plansza.fX + "px";
             div.style.height = plansza.fY - event.clientY + "px";
         }
+        else if (plansza.fX > event.clientX && plansza.fY < event.clientY) {
+            for (let y = 0; y < ileHeight; y++) {
+                for (let x = 0; x < ileWidth; x++) {
+                    let selectedDiv = document.getElementById(`blokPlanszy${(id + x) + (y * plansza.width)}`);
+                    plansza.focus2(selectedDiv);
+                    plansza.clickedDivs.push(selectedDiv);
+                }
+            }
+            div.style.top = plansza.pY + "px";
+            div.style.left = event.clientX + "px";
+            div.style.height = event.clientY - plansza.fY + "px";
+            div.style.width = plansza.fX - event.clientX + "px";
+        }
+        else if (plansza.fX > event.clientX && plansza.fY > event.clientY) {
+            for (let y = 0; y < ileHeight; y++) {
+                for (let x = 0; x < ileWidth; x++) {
+                    let selectedDiv = document.getElementById(`blokPlanszy${(id + x) + (y * plansza.width)}`);
+                    plansza.focus2(selectedDiv);
+                    plansza.clickedDivs.push(selectedDiv);
+                }
+            }
+            div.style.top = event.clientY + "px";
+            div.style.left = event.clientX + "px";
+            div.style.width = plansza.fX - event.clientX + "px";
+            div.style.height = plansza.fY - event.clientY + "px";
+        }
+    }
+    rclick(e) {
+        e.preventDefault();
+        let div = document.createElement("div");
     }
 }
 export { Plansza } 

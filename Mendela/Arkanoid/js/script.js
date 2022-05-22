@@ -55,6 +55,7 @@ class Main {
             let posy = parseInt(clickedDiv.getAttribute("posy")) + 2;
             plansza.unfocus2(clickedDiv);
             ctx.drawImage(klocek, posx, posy);
+            clickedDiv.addEventListener("mouseleave", plansza.unfocus);
         }
         plansza.clickedDivs = [];
     }
