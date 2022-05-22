@@ -62,5 +62,70 @@ rawTags = [
     "#instamood",
     "#motivation"
 ];
+let filterList = [
+    {
+        "id": 1,
+        "name": "metadata",
+        "description": "dostępne informacje o zdjęciu",
+        "method": "get",
+        "args": "bez argumentów"
+    },
+    {
+        "id": 2,
+        "name": "rotate",
+        "description": "obrót w stopniach w prawo, ujemna wartość w lewo",
+        "method": "patch",
+        "args": "id obrazka, wartość x = 0-360"
+    },
+    {
+        "id": 3,
+        "name": "resize",
+        "description": "obrót w stopniach w prawo, ujemna wartość w lewo",
+        "method": "patch",
+        "args": "id obrazka, w, h"
+    },
+    {
+        "id": 4,
+        "name": "toFormat",
+        "description": "Zmiana formatu z jednego na inny",
+        "method": "patch",
+        "args": "id obrazka, na jaki inny format"
+    },
+    {
+        "id": 5,
+        "name": "extract",
+        "description": "Przycięcie części obrazka",
+        "method": "patch",
+        "args": "id obrazka, w, h, left, top"
+    },
+    {
+        "id": 6,
+        "name": "grayscale",
+        "description": "Zmiana na odcinen szarości",
+        "method": "patch",
+        "args": "id obrazka"
+    },
+    {
+        "id": 7,
+        "name": "flip",
+        "description": "Obrót obrazka",
+        "method": "patch",
+        "args": "id obrazka"
+    },
+    {
+        "id": 8,
+        "name": "negate",
+        "description": "Negacja kolorów",
+        "method": "patch",
+        "args": "id obrazka"
+    },
+    {
+        "id": 9,
+        "name": "tint",
+        "description": "Zmiana kolorów obrazka",
+        "method": "patch",
+        "args": "id obrazka,r,g,b"
+    },
+];
 let convertedData = convertRaw(rawTags);
-module.exports = { photos, rawTags, convertedData }
+module.exports = { photos, rawTags, convertedData, filterList }

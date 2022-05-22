@@ -80,6 +80,28 @@ module.exports = {
         }
         return msg;
     },
+    addHistory: async (id, status, url) => {
+        return new Promise((resolve, reject) => {
+            try {
+                let odp;
+                for (let x = 0; x < photos.length; x++) {
+                    if (photos[x].id == id) {
+                        photos[x].lastChange = status;
+                        photos[x].history.push({
+                            status: status,
+                            timestamp: new Date(),
+                            url: url
+                        });
+                        odp = photos[x]
+                    }
+                }
+                resolve(odp);
+            }
+            catch (err) {
+                reject(err);
+            }
+        })
+    },
     getAll: () => {
         return photos;
     }
