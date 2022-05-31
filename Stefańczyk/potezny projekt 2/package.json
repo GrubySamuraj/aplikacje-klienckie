@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^16.0.1",
+    "formidable": "^1.2.2",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "logger": "^0.0.1",
+    "path": "^0.12.7",
+    "sharp": "^0.30.5",
+    "tracer": "^1.1.5"
+  }
+}

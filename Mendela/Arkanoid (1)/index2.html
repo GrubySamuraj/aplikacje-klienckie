@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="a"></canvas>
+    <script>
+        let a = document.getElementById("a");
+        var ctx = a.getContext('2d');
+        ctx.fillRect(25, 25, 100, 100);
+        let b = a.cloneNode(true);
+        // b.classList.add("aaa");
+        console.log(a.isSameNode(b));
+        // var ctx2 = a.getContext('2d');
+        // ctx2.drawImage(b, 0, 0);
+        // ctx2.clearRect(45, 45, 60, 60);
+        // ctx2.drawImage(b, 0, 0)
+    </script>
+</body>
+
+</html>

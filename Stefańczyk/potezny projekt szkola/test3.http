@@ -1,0 +1,33 @@
+### zwraca dostępne metody -> info dla programisty (opcjonalnie)
+GET http://localhost:3000/api/filters HTTP/1.1
+
+### dane o zdjęciu, potrzebne do jego obróbki
+GET http://localhost:3000/api/filters/metadata/1653251607340 HTTP/1.1
+
+### użycie konkretnego filtra, dane o nim przekazujemy w jsonie
+PATCH http://localhost:3000/api/filters HTTP/1.1
+content-type: application/json
+
+{
+  "id":9,
+  "id_obrazka":1653312007764,
+  "options": [
+        {
+            "name": "r",
+            "value":"255"
+        },
+        {
+            "name": "g",
+            "value":"222"
+        },
+        {
+            "name": "b",
+            "value":"120"
+        }
+    ]
+}
+
+//nazwa obrazka, nie id
+
+### wyswietlenie zdjecia
+GET http://localhost:3000/uploads/nazwa_albumu/upload_7155e14209853515630131243c3593da.jpg HTTP/1.1
