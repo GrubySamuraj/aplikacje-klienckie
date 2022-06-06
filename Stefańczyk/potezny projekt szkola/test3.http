@@ -2,7 +2,7 @@
 GET http://localhost:3000/api/filters HTTP/1.1
 
 ### dane o zdjęciu, potrzebne do jego obróbki
-GET http://localhost:3000/api/filters/metadata/1653251607340 HTTP/1.1
+GET http://localhost:3000/api/filters/metadata/1654099032653 HTTP/1.1
 
 ### użycie konkretnego filtra, dane o nim przekazujemy w jsonie
 PATCH http://localhost:3000/api/filters HTTP/1.1
@@ -10,7 +10,7 @@ content-type: application/json
 
 {
   "id":9,
-  "id_obrazka":1653312007764,
+  "id_obrazka":1654099032653,
   "options": [
         {
             "name": "r",
@@ -30,4 +30,4 @@ content-type: application/json
 //nazwa obrazka, nie id
 
 ### wyswietlenie zdjecia
-GET http://localhost:3000/uploads/nazwa_albumu/upload_7155e14209853515630131243c3593da.jpg HTTP/1.1
+GET http://localhost:3000/uploads/nazwa_albumu/upload_5a62b4a3ac1b6bb7ebf7374c239bc447-tint.jpg HTTP/1.1

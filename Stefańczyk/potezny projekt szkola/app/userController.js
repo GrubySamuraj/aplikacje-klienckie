@@ -50,35 +50,46 @@ module.exports = {
     register: async (data) => {
         return new Promise(async (resolve, reject) => {
             try {
-                console.log(data);
-                if (data.name && data.lastName && data.email && data.password) {
-                    const transporter = nodemailer.createTransport(config);
-                    let password = await encryptPass(data.password);
-                    console.log(password);
-                    let token = await createToken(data.email);
-                    let link = "http://localhost:3000/api/user/confirm/" + token;
-                    console.log(link);
-                    let user = {
-                        id: users.length,
-                        name: data.name,
-                        lastName: data.lastName,
-                        email: data.email,
-                        password: password,
-                        confirmed: false
+                let found;
+                for (let x = 0; x < users.length; x++) {
+                    if (users[x].email == data.email) {
+                        found = users[x];
                     }
-                    transporter.sendMail({
-                        from: config.auth.user,
-                        to: data.email,
-                        subject: "Potwierdzenie konta w serwisie Insta",
-                        text: "text",
-                        html: `<b>Witaj w naszym systemie, brakuje tylko potwierdzenia twojego konta w tym linku: <a href=${link}>tutaj</a>. Link jest ważny przez 1h.</b>`
-                    });
-                    users.push(user);
-                    resolve("email sent on " + data.email);
+                }
+                console.log(data);
+                if (!found) {
+                    if (data.name && data.lastName && data.email && data.password) {
+                        const transporter = nodemailer.createTransport(config);
+                        let password = await encryptPass(data.password);
+                        console.log(password);
+                        let token = await createToken(data.email);
+                        let link = "http://localhost:3000/api/user/confirm/" + token;
+                        console.log(link);
+                        let user = {
+                            id: users.length,
+                            name: data.name,
+                            lastName: data.lastName,
+                            email: data.email,
+                            password: password,
+                            confirmed: false
+                        }
+                        transporter.sendMail({
+                            from: config.auth.user,
+                            to: data.email,
+                            subject: "Potwierdzenie konta w serwisie Insta",
+                            text: "text",
+                            html: `<b>Witaj w naszym systemie, brakuje tylko potwierdzenia twojego konta w tym linku: <a href=${link}>tutaj</a>. Link jest ważny przez 1h.</b>`
+                        });
+                        users.push(user);
+                        resolve("email sent on " + data.email);
+                    }
+                    else {
+                        logger.error("Name, lastName, email lub password nie zostały podane!")
+                        resolve("Something went wrong");
+                    }
                 }
                 else {
-                    logger.error("Name, lastName, email lub password nie zostały podane!")
-                    resolve("Something went wrong");
+                    resolve("User exists");
                 }
             }
             catch (err) {

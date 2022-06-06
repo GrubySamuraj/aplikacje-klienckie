@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "formidable": "^1.2.2",
-    "logger": "^0.0.1",
-    "sharp": "^0.30.4",
-    "tracer": "^1.1.5"
-  }
-}

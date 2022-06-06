@@ -10,14 +10,14 @@ content-type: application/json
 }
 
 ### user potwierdza rejestrację z użyciem tokena plus mail że konto aktywne
-GET http://localhost:3000/api/user/confirm/<token>
+GET http://localhost:3000/api/user/confirm/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impha3ViLmRyYWdvc3pAbzIucGwiLCJsYXN0bmFtZSI6Imxhc3ROYW1lIiwibmFtZSI6Im5hbWUiLCJpYXQiOjE2NTQwOTk0MzksImV4cCI6MTY1NDEwMTIzOX0.b1tiOkKItFhWBHVKw4IX1lMTyoKFJ0y86EvnfOAtijw
 
 ### logowanie z odesłaniem tokena po zalogowaniu - od tej pory każde żądanie zawiera token
 POST http://localhost:3000/api/user/login
 content-type: application/json
 
 {
-  "email":"name@email2.pl",
+  "email":"jakub.dragosz@o2.pl",
   "password":"password"
 }
 
@@ -26,7 +26,7 @@ GET http://localhost:3000/api/users HTTP/1.1
 
 ###pobranie danych usera
 GET http://localhost:3000/api/user HTTP/1.1
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbWVAZW1haWwyLnBsIiwibGFzdG5hbWUiOiJsYXN0TmFtZSIsIm5hbWUiOiJmaXJzdE5hbWUiLCJpYXQiOjE2NTQwMjk4OTgsImV4cCI6MTY1NDAzMTY5OH0.rdT0lZ-j0GSDZSs-YzVvuLpPwzRrjyV-YyGcg_lzHl4
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Impha3ViLmRyYWdvc3pAbzIucGwiLCJsYXN0bmFtZSI6Imxhc3ROYW1lIiwibmFtZSI6Im5hbWUiLCJpYXQiOjE2NTQwOTk0MzksImV4cCI6MTY1NDEwMTIzOX0.b1tiOkKItFhWBHVKw4IX1lMTyoKFJ0y86EvnfOAtijw
 ### aktualizacja danych usera w jego profilu
 PATCH http://localhost:3000/api/user HTTP/1.1
 authorization: Bearer "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5hbWVAZW1haWwyLnBsIiwibGFzdG5hbWUiOiJsYXN0TmFtZSIsIm5hbWUiOiJmaXJzdE5hbWUiLCJpYXQiOjE2NTQwMjk4OTgsImV4cCI6MTY1NDAzMTY5OH0.rdT0lZ-j0GSDZSs-YzVvuLpPwzRrjyV-YyGcg_lzHl4

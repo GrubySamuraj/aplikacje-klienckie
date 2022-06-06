@@ -13,6 +13,7 @@ const router = async (req, res) => {
     }
     else if (req.url.match(/\/api\/photos\/([0-9]+)/) && req.method == "GET") {
         let id = req.url.split("/")[3];
+        console.log(id);
         let zwrot = jsonController.getOne(id);
         res.writeHead(200, { "Content-type": "application/json" });
         res.end(JSON.stringify(zwrot, null, 5));
