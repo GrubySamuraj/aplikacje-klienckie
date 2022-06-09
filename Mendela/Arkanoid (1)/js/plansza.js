@@ -104,8 +104,8 @@ class Plansza {
         div.setAttribute("id", "zaznaczenie");
         console.log(e);
         plansza.fX = e.clientX;
-        plansza.fY = e.clientY;
-        div.style.top = e.clientY + "px";
+        plansza.fY = e.clientY + scrollY;
+        div.style.top = e.clientY + scrollY + "px";
         div.style.left = e.clientX + "px";
         let body = document.body;
         body.appendChild(div);
@@ -122,12 +122,10 @@ class Plansza {
     poruszanie(event) {
         let div = document.getElementById("zaznaczenie");
         let overlap = div.getBoundingClientRect();
-        let x = overlap.x;
-        let y = overlap.y;
         let plansz = document.getElementById("plansza");
         let left = parseInt(getComputedStyle(plansz).left.slice(0, 3));
-        let pX = Math.floor((x - left) / 56);
-        let pY = Math.floor(y / 29);
+        let pX = Math.floor((overlap.x - left) / 56);
+        let pY = Math.floor((overlap.y + scrollY) / 29);
         let id = (pY * plansza.width) + pX;
         let roznicax = overlap.x - document.getElementById(`blokPlanszy${id}`).getBoundingClientRect().x;
         let roznicay = overlap.y - document.getElementById(`blokPlanszy${id}`).getBoundingClientRect().y;
@@ -141,20 +139,24 @@ class Plansza {
             }
             plansza.clickedDivs = [];
         }
-        if (plansza.fX < event.clientX && plansza.fY < event.clientY) {
+        if (plansza.fX < event.clientX && plansza.fY < event.clientY + scrollY) {
+            console.log("w drugin tylko sinus");
             for (let y = 0; y < ileHeight; y++) {
                 for (let x = 0; x < ileWidth; x++) {
-                    let selectedDiv = document.getElementById(`blokPlanszy${(id + x) + (y * plansza.width)}`);
-                    plansza.focus2(selectedDiv);
-                    if (!plansza.clickedDivs.includes(selectedDiv)) {
-                        plansza.clickedDivs.push(selectedDiv);
+                    if (document.getElementById(`blokPlanszy${(id + x) + (y * plansza.width)}`)) {
+                        let selectedDiv = document.getElementById(`blokPlanszy${(id + x) + (y * plansza.width)}`);
+                        plansza.focus2(selectedDiv);
+                        if (!plansza.clickedDivs.includes(selectedDiv)) {
+                            plansza.clickedDivs.push(selectedDiv);
+                        }
                     }
                 }
             }
             div.style.width = event.clientX - plansza.fX + "px";
-            div.style.height = event.clientY - plansza.fY + "px";
+            div.style.height = event.clientY - plansza.fY + scrollY + "px";
         }
-        else if (plansza.fX < event.clientX && plansza.fY > event.clientY) {
+        else if (plansza.fX < event.clientX && plansza.fY > event.clientY + scrollY) {
+            console.log("W pierwszym same plusy");
             for (let y = 0; y < ileHeight; y++) {
                 for (let x = 0; x < ileWidth; x++) {
                     let selectedDiv = document.getElementById(`blokPlanszy${(id + x) + (y * plansza.width)}`);
@@ -164,12 +166,13 @@ class Plansza {
                     }
                 }
             }
-            div.style.top = event.clientY + "px";
+            div.style.top = event.clientY + scrollY + "px";
             div.style.left = plansza.pX + "px";
             div.style.width = event.clientX - plansza.fX + "px";
-            div.style.height = plansza.fY - event.clientY + "px";
+            div.style.height = plansza.fY - event.clientY - scrollY + "px";
         }
-        else if (plansza.fX > event.clientX && plansza.fY < event.clientY) {
+        else if (plansza.fX > event.clientX && plansza.fY < event.clientY + scrollY) {
+            console.log("W trzecim tangens i cotangens");
             for (let y = 0; y < ileHeight; y++) {
                 for (let x = 0; x < ileWidth; x++) {
                     let selectedDiv = document.getElementById(`blokPlanszy${(id + x) + (y * plansza.width)}`);
@@ -181,10 +184,11 @@ class Plansza {
             }
             div.style.top = plansza.pY + "px";
             div.style.left = event.clientX + "px";
-            div.style.height = event.clientY - plansza.fY + "px";
+            div.style.height = event.clientY - plansza.fY + scrollY + "px";
             div.style.width = plansza.fX - event.clientX + "px";
         }
-        else if (plansza.fX > event.clientX && plansza.fY > event.clientY) {
+        else if (plansza.fX > event.clientX && plansza.fY > event.clientY - scrollY) {
+            console.log("a w czwartym cosinus");
             for (let y = 0; y < ileHeight; y++) {
                 for (let x = 0; x < ileWidth; x++) {
                     let selectedDiv = document.getElementById(`blokPlanszy${(id + x) + (y * plansza.width)}`);
@@ -194,10 +198,10 @@ class Plansza {
                     }
                 }
             }
-            div.style.top = event.clientY + "px";
+            div.style.top = event.clientY + scrollY + "px";
             div.style.left = event.clientX + "px";
             div.style.width = plansza.fX - event.clientX + "px";
-            div.style.height = plansza.fY - event.clientY + "px";
+            div.style.height = plansza.fY - event.clientY - scrollY + "px";
         }
     }
     delete = () => {
@@ -216,6 +220,7 @@ class Plansza {
             posyy.push(posy);
             plansza.unfocus2(clickedDiv);
             clickedDiv.addEventListener("mouseleave", plansza.unfocus);
+            clickedDiv.removeAttribute("content");
             ctx.fillRect(posx - 1, posy - 1, 56, 29);
         }
         functionsClick.aktualizujHistory(plansza.clickedDivs);
@@ -252,7 +257,7 @@ class Plansza {
             }
             else if (x == 5) {
                 options.innerText = "Delete";
-                options.addEventListener("click", functionsClick.delete);
+                options.addEventListener("click", plansza.delete);
             }
             else if (x == 6) {
                 options.innerText = "Save to File";
@@ -260,6 +265,7 @@ class Plansza {
             }
             else if (x == 7) {
                 options.innerText = "Load From File";
+                options.setAttribute("id", "load");
                 options.addEventListener("click", functionsClick.loadFromFile);
             }
             div.appendChild(options);

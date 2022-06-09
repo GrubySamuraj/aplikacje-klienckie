@@ -10,22 +10,36 @@
         canvas {
             border: 1px solid black;
         }
+        #dupa{
+            left:0px;
+            position:absolute;
+            top:0px;
+            width: 2000px;
+            height: 2000px;
+            background-color: aqua;
+        }
+        .chuje{
+            position: absolute;
+            background-color: red;
+            width: 100px;
+            height: 100px;
+        }
     </style>
 </head>
 
 <body>
-    <canvas id="a"></canvas>
+    <div id="dupa"></div>
     <script>
-        let a = document.getElementById("a");
-        var ctx = a.getContext('2d');
-        ctx.fillRect(25, 25, 100, 100);
-        let b = a.cloneNode(true);
-        // b.classList.add("aaa");
-        console.log(a.isSameNode(b));
-        // var ctx2 = a.getContext('2d');
-        // ctx2.drawImage(b, 0, 0);
-        // ctx2.clearRect(45, 45, 60, 60);
-        // ctx2.drawImage(b, 0, 0)
+        document.getElementById("dupa").onclick = function(e){
+            let div = document.createElement("div");
+            div.classList.add("chuje");
+            console.log("scroll: " + scrollY);
+            console.log("bez scrolla: "+e.clientY);
+            div.style.top = e.clientY + scrollY + "px";
+            div.style.left = e.clientX + "px";
+            console.log(e.clientX);
+            document.getElementById("dupa").appendChild(div)
+        }
     </script>
 </body>
 
