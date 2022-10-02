@@ -2,4 +2,4 @@
 $dbname = "irc";
 $host = "localhost";
 $user = "root";
-$passwd = "zaq1@WSX";
+$passwd = "nie interesuj się bo kociej mordy dostaniesz ;>";
