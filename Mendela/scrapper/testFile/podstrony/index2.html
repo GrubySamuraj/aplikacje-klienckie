@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="/dupsko">dupsko</a>
+    <a href="/aaa">dupsko</a>
+    <script>
+        let a = document.querySelectorAll("a");
+        console.log(a[0]);
+        let tab = [
+            {
+                a: "dupa",
+                b: "b",
+                c: "c"
+            },
+            {
+                a: "adsa",
+                b: "vxcvxc",
+                c: "jdsfjsdj"
+            },
+        ];
+        let obj = {
+            a: "a",
+            b: "b",
+            c: "c"
+        }
+        console.log(Object.getOwnPropertyNames(obj));
+        // console.log(tab.includes(obj.b));
+        let isset = tab.map((item) => {
+            if (item.b == obj.b) {
+                return true;
+            }
+            else {
+                return false
+            }
+        });
+        console.log(isset.includes(true));
+        function dupa(x, y) {
+            let pom;
+            pom = y
+            y = x + y;
+            x = pom;
+            if (x) {
+                return dupa(x, y)
+            }
+            else {
+                return x
+            }
+        }
+        // let aaa = dupa(1, 1);
+        // console.log(aaa);
+
+    </script>
+</body>
+
+</html>

@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cc4b3573-d801-45c0-8e9c-d010b5d44cf1" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../Mendela/Arkanoid/img/arkanoid.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Mendela/Arkanoid/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Mendela/Arkanoid/js/kloc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Mendela/Arkanoid/js/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Mendela/Arkanoid/js/plansza.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../Mendela/Arkanoid/js/script.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Mendela/Arkanoid (1)/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Mendela/Arkanoid (1)/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Mendela/Arkanoid (1)/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Mendela/Arkanoid (1)/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Mendela/Arkanoid (1)/js/plansza.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Mendela/Arkanoid (1)/js/plansza.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Mendela/Arkanoid (1)/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Mendela/Arkanoid (1)/js/script.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../spark2/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../spark2/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
@@ -174,6 +172,7 @@
       <workItem from="1653828998126" duration="595000" />
       <workItem from="1653830197132" duration="581000" />
       <workItem from="1653830800824" duration="65000" />
+      <workItem from="1655139652692" duration="17000" />
     </task>
     <servers />
   </component>

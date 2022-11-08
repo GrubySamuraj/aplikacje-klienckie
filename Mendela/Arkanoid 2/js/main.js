@@ -1,0 +1,13 @@
+"use strict";
+import { Plansza } from "./plansza.js";
+import { Main } from "./script.js";
+import { rClickFunctions } from "./rClickFunctions.js";
+import { Game } from "./game.js";
+let plansza = new Plansza();
+let game = new Game();
+plansza.createPlansza();
+let functionsClick = new rClickFunctions();
+export { plansza };
+export { functionsClick };
+export { game };
+export let main = new Main();
