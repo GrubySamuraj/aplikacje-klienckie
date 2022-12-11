@@ -1,0 +1,8 @@
+#date {
+    float: right;
+    margin-left: 150px;
+}
+
+#container {
+    display: flex;
+}

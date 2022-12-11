@@ -1,0 +1,18 @@
+<div id="buttons">
+    <div *ngFor="let year of years">
+        <app-year-button [value]="year" [album]="album" (czasopisma)="getElement($event)"></app-year-button>
+    </div>
+    <button routerLink="/{{album}}/all" (click)="showAllItems()">Wszystkie</button>
+</div>
+<table>
+    <tr>
+        <th></th>
+        <th>strona tytulowa</th>
+        <th>plik</th>
+        <th>pismo</th>
+        <th>darczyncy</th>
+    </tr>
+    <tr *ngFor="let element of all">
+        <app-element-list [data]="element" [album]="album"></app-element-list>
+    </tr>
+</table>

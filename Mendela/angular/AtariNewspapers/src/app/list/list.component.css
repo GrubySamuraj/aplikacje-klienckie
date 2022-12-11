@@ -1,0 +1,9 @@
+#buttons {
+    display: flex;
+    flex-direction: row;
+}
+
+
+th {
+    border: 1px solid black;
+}

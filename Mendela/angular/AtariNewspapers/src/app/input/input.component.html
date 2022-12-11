@@ -1,0 +1,9 @@
+<div id="input">
+    Wpisz zarobki z poprzedniego roku: <input type="password" [(ngModel)]="value" (input)="onInputHandler($event)"
+        value={{value}}>USD<br />
+    <span *ngIf="value;then span">
+    </span>
+    <ng-template #span>
+        I tak widzimy, że Twoje zarobki to: {{value|currency:"EUR":'symbol':'1.0-3'}}
+    </ng-template>
+</div>

@@ -1,0 +1,8 @@
+<div *ngIf="!newsPapersVisible;then input;else newsPapers">
+</div>
+<ng-template #input>
+    <app-input (newsPapersVisible2)="newsPapersVisible=$event" [newsPapersVisible]="newsPapersVisible"></app-input>
+</ng-template>
+<ng-template #newsPapers>
+    <app-newspapers></app-newspapers>
+</ng-template>
