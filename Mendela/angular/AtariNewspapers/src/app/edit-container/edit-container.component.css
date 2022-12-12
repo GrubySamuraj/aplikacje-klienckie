@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    background-color: #666;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+#buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    margin: 10px;
+}
+
+#container {
+    display: flex;
+    flex-direction: row;
+}

@@ -1,0 +1,12 @@
+<div id="container">
+    <div id="buttons">
+        <button mat-raised-button (click)="loadedComponent='add'">Dodaj pismo</button>
+        <button mat-raised-button (click)="loadedComponent='edit'">Edytuj pismo</button>
+        <button mat-raised-button (click)="loadedComponent='podglad'">podgląd</button>
+    </div>
+    <div id="tab" [ngSwitch]="loadedComponent">
+        <app-add *ngSwitchCase="'add'"></app-add>
+        <app-edit *ngSwitchCase="'edit'"></app-edit>
+        <div *ngSwitchCase="'podglad'">dupa</div>
+    </div>
+</div>

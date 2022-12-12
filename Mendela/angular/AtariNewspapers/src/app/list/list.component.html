@@ -12,7 +12,7 @@
         <th>pismo</th>
         <th>darczyncy</th>
     </tr>
-    <tr *ngFor="let element of all">
+    <ng-container *ngFor="let element of all">
         <app-element-list [data]="element" [album]="album"></app-element-list>
-    </tr>
+    </ng-container>
 </table>

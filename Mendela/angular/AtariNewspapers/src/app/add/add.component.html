@@ -1,0 +1,17 @@
+<form class="form">
+    <mat-form-field class="example-full-width">
+        <mat-label>nazwa pisma:</mat-label>
+        <input matInput placeholder="pismo" [formControl]="name">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Plik miniaturki:</mat-label>
+        <input matInput placeholder="EX:dupa.jpg" [formControl]="file">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Year</mat-label>
+        <mat-select [formControl]="years" multiple>
+            <mat-option *ngFor="let year of yearsList" [value]="year">{{year}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button (click)="addData()">Dodaj</button>
+</form>
