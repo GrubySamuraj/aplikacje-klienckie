@@ -8,7 +8,7 @@ export class NewsPaperDataService {
   constructor(private httpClient: HttpClient) { }
   async getXml() {
     return new Promise<Document>((resolve) => {
-      this.httpClient.get("../../assets/newsPapers.xml", { responseType: 'text' })
+      this.httpClient.get("app/assets/newsPapers.xml", { responseType: 'text' })
         .subscribe((str) => {
           let data = new window.DOMParser().parseFromString(str, "text/xml");
           resolve(data);
@@ -85,6 +85,32 @@ export class NewsPaperDataService {
         }
         result = nodes.iterateNext();
       }
+      return elements;
+    }
+    return [];
+  }
+  showNewsPaper(xml: Document, path: string) {
+    let elements = [];
+    if (xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null)) {
+      let nodes = xml.evaluate(path, xml, null, XPathResult.ANY_TYPE, null);
+      let result = nodes.iterateNext();
+      while (result) {
+        let all = result as HTMLElement;
+        let names = all.getElementsByTagName("nazwa");
+        let numer = all.getElementsByTagName("numer");
+        let miniatura = all.getElementsByTagName("miniaturka");
+        for (let x = 0; x < names.length; x++) {
+          console.log(all.children[x].nodeName);
+          let obj = {
+            name: all.children[x].nodeName,
+            numer: numer[x].innerHTML,
+            miniatura: miniatura[x].innerHTML,
+          }
+          elements.push(obj);
+        }
+        result = nodes.iterateNext();
+      }
+      console.log(elements);
       return elements;
     }
     return [];
