@@ -25,7 +25,7 @@
                 <ng-template #inputName>{{element.nazwa}} </ng-template>
                 <ng-template #Name>
                     <mat-form-field class="example-full-width">
-                        <input matInput value="{{element.nazwa}}">
+                        <input matInput value="{{element.nazwa}}" id="inputVal{{element.id}}">
                     </mat-form-field>
                 </ng-template>
             </td>
@@ -38,7 +38,7 @@
                 <ng-template #inputMin>{{element.miniaturka}} </ng-template>
                 <ng-template #min>
                     <mat-form-field class="example-full-width">
-                        <input matInput value="{{element.miniaturka}}">
+                        <input matInput value="{{element.miniaturka}}" id="inputMin{{element.id}}">
                     </mat-form-field>
                 </ng-template>
             </td>
@@ -55,7 +55,8 @@
                 </ng-template>
                 <ng-template #select>
                     <mat-form-field appearance="fill">
-                        <mat-select multiple>
+                        <mat-select multiple id="Select{{element.id}}"
+                            (selectionChange)="changeValue($event.value,element.id)">
                             <mat-option *ngFor="let year of yearsList" [value]="year">
                                 {{year}}
                             </mat-option>
@@ -79,4 +80,5 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <button mat-raised-button (click)="sendData()">SendData</button>
 </form>

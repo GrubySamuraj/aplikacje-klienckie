@@ -17,6 +17,7 @@ export class InputComponent implements OnInit {
     }
     else {
       if (target.value === "666.666") {
+        window.location.href = "/news"
         this.newsPapersVisible2.emit(!this.newsPapersVisible);
       }
     }

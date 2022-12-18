@@ -44,8 +44,8 @@ export class NewsPaperDataService {
         let year = result as HTMLElement;
         console.log(year.innerHTML.split(","));
         let years = year.innerHTML.split(",");
-        return years;
         result = nodes.iterateNext();
+        return years;
       }
     }
     return [];
